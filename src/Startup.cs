@@ -136,12 +136,7 @@ namespace Miniblog.Core
             app.UseOutputCaching();
             app.UseWebMarkupMin();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Blog}/{action=Index}/{id?}");
-            });
+            app.UseMvc();
         }
     }
 }
