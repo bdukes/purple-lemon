@@ -16,9 +16,12 @@ html {
     text-size-adjust: none;
     -ms-touch-action: manipulation;
     touch-action: manipulation;
-    
     background-color: $color__background__outer;
-    padding: 1%;
+    
+    padding: 3%;
+    @media (min-width: $width__large) {
+        padding: 1%;
+    }
 }
 
 body {
@@ -27,9 +30,18 @@ body {
     color: $color__text;
     background-color: $color__background;
     display: grid;
-    grid-template-columns: 20% auto;
-    grid-template-rows: auto $height__footer;
-    grid-template-areas: "header main" "footer footer";
+    grid: 
+        "header" auto 
+        "main" auto 
+        "footer" 3rem
+    / auto;
+
+    @media (min-width: $width__large) {
+        grid: 
+            "header main" auto 
+            "footer footer" $height__footer
+        unquote("/ 20% auto");
+    }
 }
 
 @keyframes fade-in {
@@ -45,8 +57,11 @@ body {
 main {
     animation: fade-in 1s ease;
     grid-area: main;
-    height: $height__main;
-    overflow-y: auto;
+
+    @media (min-width: $width__large) {
+        height: $height__main;
+        overflow-y: auto;
+    }
 }
 
 b, strong {
@@ -82,6 +97,11 @@ ul, ol {
     padding-left: 2em;
 }
 
+nav ul {
+    padding: 0;
+    margin: 0;
+}
+
 nav li {
     list-style: none;
 }
@@ -90,15 +110,14 @@ nav li {
     grid-area: header;
     text-align: center;
     text-transform: lowercase;
-    border-right: 1px solid $warm-gray;
     margin: 1.5em 0;
     padding: 1.5em;
 
     li {
-        padding: 1em 0;
+        padding: 0.75em 0;
 
         &.logo {
-            margin-bottom: 5em;
+            margin-bottom: 1.5em;
             border-bottom: 1px solid $warm-gray;
         }
     }
@@ -111,27 +130,44 @@ nav li {
             color: $color__link;
         }
     }
+
+    @media (min-width: $width__large) {
+        border-right: 1px solid $warm-gray;
+        li.logo {
+            margin-bottom: 5em;
+        }
+    }
 }
 
 .site-footer {
     grid-area: footer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: $color__background__outer;
-    padding: 1em 1em 0;
+    text-align: center;
     line-height: 1;
+    padding: 1em 1em 0;
+    background-color: $color__background__outer;
 
     small {
         color: rgba(0, 0, 0, 0.3);
     }
 
     nav img {
+        padding: 1em 0; 
+
         transition: opacity 0.5s ease-in-out;
         opacity: 0.3;
 
         &:hover {
             opacity: 1;
+        }
+    }
+
+    @media (min-width: $width__large) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        nav img {
+            padding: 0;
         }
     }
 }

@@ -1,19 +1,26 @@
 ﻿@import "variables";
 
-$padding_home: 3rem;
 
 .home {
-    padding: $padding_home;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    padding: 1.5rem;
 
     img {
         padding: 0.25em;
-        max-height: calc((#{$height__main} - (#{$padding_home} * 2)) / 2);
-        justify-self: start;
+    }
 
-        &:nth-child(odd) {
-            justify-self: end;
+    @media (min-width: $width__large) {
+        $padding_home: 3rem;
+        padding: $padding_home;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        img {
+            max-height: calc((#{$height__main} - (#{$padding_home} * 2)) / 2);
+            justify-self: start;
+
+            &:nth-child(odd) {
+                justify-self: end;
+            }
         }
     }
 }

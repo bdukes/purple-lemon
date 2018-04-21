@@ -10,6 +10,8 @@ $color__text: #585858;
 $color__background: #fff;
 $color__background__outer: $warm-gray;
 
+$width__large: 700px;
+
 $line-height: 1.6;
 $height__footer: 3rem;
 $height__main: calc(99vh - (#{$height__footer} * #{$line-height}));
