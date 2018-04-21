@@ -76,6 +76,10 @@ h1, h2, h3, h4 {
     font-weight: normal;
 }
 
+small {
+    font-size: 0.75em;   
+}
+
 ul, ol {
     padding-left: 2em;
 }
@@ -113,14 +117,16 @@ nav li {
 
 .site-footer {
     grid-area: footer;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
     background-color: $color__background__outer;
     padding: 1em 1em 0;
     line-height: 1;
+
+    small {
+        color: rgba(0, 0, 0, 0.3);
+    }
 
     nav img {
         transition: opacity 0.5s ease-in-out;
