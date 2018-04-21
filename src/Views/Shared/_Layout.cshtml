@@ -38,17 +38,17 @@
 </head>
 <body itemscope itemtype="http://schema.org/WebPage">
 
-<header class="siteheader">
-    <nav>
-        <ul>
-            <li><a href="/"><img src="~/img/logo.png" alt="Purple Lemon Photography" /></a></li>
-            <li><a asp-controller="About" asp-action="Index">About</a></li>
-            <li><a asp-controller="Gallery" asp-action="Index">Galleries</a></li>
-            <li><a asp-controller="Investment" asp-action="Index">Investment</a></li>
-            <li><a asp-controller="Blog" asp-action="Index">Blog</a></li>
-        </ul>
-    </nav>
-</header>
+    <header class="site-header">
+        <nav>
+            <ul>
+                <li class="logo"><a asp-controller="Home" asp-action="Index"><img src="~/img/logo-618x139.png" width="618" height="139" alt="Purple Lemon Photography" /></a></li>
+                <li><a asp-controller="About" asp-action="Index">About</a></li>
+                <li><a asp-controller="Gallery" asp-action="Index">Galleries</a></li>
+                <li><a asp-controller="Investment" asp-action="Index">Investment</a></li>
+                <li><a asp-controller="Blog" asp-action="Index">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <main itemprop="mainEntity" itemscope itemtype="http://schema.org/Blog">
         <noscript>
@@ -57,39 +57,24 @@
         @RenderBody()
     </main>
 
-    <footer class="sitefooter">
-        <div class="container">
-            <nav>
-                <ul>
-                    <li>
-                        @* from https://www.ppa.com/be-more/certification/cpp-only-section/cpp-logo-html-for-posting-on-web-sites *@
-                        <a href="https://www.ppa.com/benefits/education/certification/why-hire-a-certified-professional-photographer" target="_blank">
-                            <img src="~/img/cpp-90x36.jpg" alt="Certified Professional Photographer" width="90" height="36" title="Certified Professional Photographer" />
-                        </a>
-                    </li>
-                    <li>
-                        @* from https://www.ppa.com/resources/sales-tools/logos *@
-                        <a href="https://www.findaphotographer.com/see-the-difference/certified" target="_blank">
-                            <img src="~/img/ppa-115x20.png" alt="Professional Photographers of America" width="115" height="20" title="Professional Photographers of America" />
-                        </a>
-                    </li>
+    <footer class="site-footer">
+        <small>Copyright @DateTime.Today.Year Purple Lemon Photography, LLC</small>
+        <nav>
+            <ul>
+                <li>
+                    @* from https://www.ppa.com/be-more/certification/cpp-only-section/cpp-logo-html-for-posting-on-web-sites *@
+                    <a href="https://www.ppa.com/benefits/education/certification/why-hire-a-certified-professional-photographer" target="_blank">
+                        <img src="~/img/cpp-70x28.png" alt="Certified Professional Photographer" width="70" height="28" title="Certified Professional Photographer"/>
+                    </a>
+                </li>
 
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <li><a asp-controller="Blog" asp-action="Edit">New post</a></li>
-                        <li><a href="~/logout/" title="Sign out as administrator">Sign out</a></li>
-                    }
-                    @*else
-                        {
-                            string path = Context.Request.Path;
-                            <li><a href="~/login/?returnUrl=@path" rel="nofollow" title="Sign in as administrator">Sign in</a></li>
-                        }*@
-                </ul>
-            </nav>
-            @*<p>
-                    Powered by <a href="https://github.com/madskristensen/Miniblog.Core" rel="noopener noreferrer" target="_blank">Miniblog.Core</a>
-                </p>*@
-        </div>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li><a asp-controller="Blog" asp-action="Edit">New post</a></li>
+                    <li><a href="~/logout/" title="Sign out as administrator">Sign out</a></li>
+                }
+            </ul>
+        </nav>
     </footer>
 
     @* This lazy loads the stylesheet in a non-render blocking way *@

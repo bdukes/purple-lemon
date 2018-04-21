@@ -1,7 +1,17 @@
-﻿$footer_height: 150px;
-$link_color: #0070be;
-$text_color: #222;
-$light-bg-color: #f7f7f7;
+﻿$brand-purple: #6f2c91;
+$brand-yellow: #fbe219;
+$brand-green: #64bd4f;
+$warm-gray: #e6e2de;
+$cool-gray: #dad8d9;
+
+$color__heading: $brand-purple;
+$color__link: $brand-purple;
+$color__text: #585858;
+$color__background: #fff;
+$color__background__outer: $warm-gray;
+
+$line-height: 1.6;
+$height__footer: 3rem;
 
 // Comments
 $comments_bg_color: #f1f1f1;

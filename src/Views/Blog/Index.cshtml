@@ -4,6 +4,10 @@
     int currentPage = int.Parse(ViewContext.RouteData.Values["page"] as string ?? "0");
 }
 
+@section head {
+    <link rel="stylesheet" href="~/css/blog.scss" />
+}
+
 @foreach (var post in Model)
 {
     await Html.RenderPartialAsync("Post.cshtml", post);
