@@ -29,7 +29,9 @@ body {
     display: grid;
     grid-template-columns: auto 20%;
     grid-template-rows: auto $height__footer;
-    grid-template-areas: "main header" "footer footer";
+    grid-template-areas: 
+        "main header" 
+        "footer footer";
 }
 
 @keyframes fade-in {
