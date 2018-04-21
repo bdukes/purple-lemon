@@ -45,7 +45,7 @@ body {
 main {
     animation: fade-in 1s ease;
     grid-area: main;
-    height: calc(99vh - (#{$height__footer} * #{$line-height}));
+    height: $height__main;
     overflow-y: auto;
 }
 

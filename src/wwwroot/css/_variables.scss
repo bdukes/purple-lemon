@@ -12,6 +12,7 @@ $color__background__outer: $warm-gray;
 
 $line-height: 1.6;
 $height__footer: 3rem;
+$height__main: calc(99vh - (#{$height__footer} * #{$line-height}));
 
 // Comments
 $comments_bg_color: #f1f1f1;
