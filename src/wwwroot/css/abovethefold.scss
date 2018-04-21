@@ -27,11 +27,9 @@ body {
     color: $color__text;
     background-color: $color__background;
     display: grid;
-    grid-template-columns: auto 20%;
+    grid-template-columns: 20% auto;
     grid-template-rows: auto $height__footer;
-    grid-template-areas: 
-        "main header" 
-        "footer footer";
+    grid-template-areas: "header main" "footer footer";
 }
 
 @keyframes fade-in {
@@ -92,7 +90,7 @@ nav li {
     grid-area: header;
     text-align: center;
     text-transform: lowercase;
-    border-left: 1px solid $warm-gray;
+    border-right: 1px solid $warm-gray;
     margin: 1.5em 0;
     padding: 1.5em;
 
