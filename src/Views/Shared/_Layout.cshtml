@@ -40,13 +40,10 @@
 
     <header class="site-header">
         <nav>
-            <ul>
-                <li class="logo"><a asp-controller="Home" asp-action="Index"><img src="~/img/logo-618x139.png" width="618" height="139" alt="Purple Lemon Photography" /></a></li>
-                <li><a asp-controller="About" asp-action="Index">About</a></li>
-                <li><a asp-controller="Gallery" asp-action="Index">Galleries</a></li>
-                <li><a asp-controller="Investment" asp-action="Index">Investment</a></li>
-                <li><a asp-controller="Blog" asp-action="Index">Blog</a></li>
-            </ul>
+            <a class="logo" asp-controller="Home" asp-action="Index"><img src="~/img/logo-618x139.png" width="618" height="139" alt="Purple Lemon Photography" /></a>
+            @{
+                await Html.RenderPartialAsync("_Menu");
+            }
         </nav>
     </header>
 
