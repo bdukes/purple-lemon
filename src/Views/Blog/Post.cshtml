@@ -58,16 +58,17 @@
         <link rel="preload" href="~/css/comments.scss" as="style" />
         <noscript><link rel="stylesheet" href="~/css/comments.scss" /></noscript>
     }
-
-    @section Scripts {
-        <script src="~/js/comments.js" async defer></script>
-    }
 }
 
-@if (User.Identity.IsAuthenticated)
-{
-    @section Scripts {
+@section Scripts {
+    @if (User.Identity.IsAuthenticated)
+    {
         <script src="~/js/admin.js" async defer></script>
         <link rel="stylesheet" href="~/css/admin.scss" />
+    }
+    
+    @if (showFullPost)
+    {
+        <script src="~/js/comments.js" async defer></script>
     }
 }
