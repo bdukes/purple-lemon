@@ -27,6 +27,7 @@ namespace Miniblog.Core.Controllers
 
         [Route("/blog/{page:int?}")]
         [OutputCache(Profile = "default")]
+        [HttpGet]
         public async Task<IActionResult> Index([FromRoute]int page = 0)
         {
             var posts = await _blog.GetPosts(_settings.Value.PostsPerPage, _settings.Value.PostsPerPage * page);
@@ -39,6 +40,7 @@ namespace Miniblog.Core.Controllers
 
         [Route("/blog/category/{category}/{page:int?}")]
         [OutputCache(Profile = "default")]
+        [HttpGet]
         public async Task<IActionResult> Category(string category, int page = 0)
         {
             var posts = (await _blog.GetPostsByCategory(category)).Skip(_settings.Value.PostsPerPage * page).Take(_settings.Value.PostsPerPage);
@@ -59,6 +61,7 @@ namespace Miniblog.Core.Controllers
 
         [Route("/blog/{slug?}")]
         [OutputCache(Profile = "default")]
+        [HttpGet]
         public async Task<IActionResult> Post(string slug)
         {
             var post = await _blog.GetPostBySlug(slug);
@@ -116,6 +119,7 @@ namespace Miniblog.Core.Controllers
             return Redirect(post.GetLink());
         }
 
+        [NonAction]
         private async Task SaveFilesToDisk(Post post)
         {
             var imgRegex = new Regex("<img[^>].+ />", RegexOptions.IgnoreCase | RegexOptions.Compiled);
