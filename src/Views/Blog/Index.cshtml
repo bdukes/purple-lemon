@@ -18,7 +18,6 @@
     {
         <a rel="next" href="@ViewData["next"]" title="Newer posts">Newer &raquo;</a>
     }
-    <br /><br />
 
     @section Head {
         <link rel="stylesheet" href="~/css/blog.scss" />
@@ -28,7 +27,7 @@
         }
         @if (currentPage > 0)
         {
-            <link rel="next" href="@ViewData["next"]" />
+            <link rel="next" href="@ViewData["next"]"  />
         }
     }
 </nav>
