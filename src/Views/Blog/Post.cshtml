@@ -58,6 +58,10 @@
         <link rel="preload" href="~/css/comments.scss" as="style" />
         <noscript><link rel="stylesheet" href="~/css/comments.scss" /></noscript>
     }
+
+    @section Scripts {
+        <script src="~/js/comments.js" async defer></script>
+    }
 }
 
 @if (User.Identity.IsAuthenticated)
