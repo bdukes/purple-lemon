@@ -33,8 +33,8 @@ namespace Miniblog.Core.Controllers
             var posts = await _blog.GetPosts(_settings.Value.PostsPerPage, _settings.Value.PostsPerPage * page);
             ViewData["Title"] = _manifest.Name;
             ViewData["Description"] = _manifest.Description;
-            ViewData["prev"] = $"/{page + 1}/";
-            ViewData["next"] = $"/{(page <= 1 ? null : page - 1 + "/")}";
+            ViewData["prev"] = Url.Action("Index", new { page = page + 1 });
+            ViewData["next"] = Url.Action("Index", new { page = page <= 1 ? (int?)null : page - 1 });
             return View("~/Views/Blog/Index.cshtml", posts);
         }
 
@@ -46,8 +46,8 @@ namespace Miniblog.Core.Controllers
             var posts = (await _blog.GetPostsByCategory(category)).Skip(_settings.Value.PostsPerPage * page).Take(_settings.Value.PostsPerPage);
             ViewData["Title"] = _manifest.Name + " " + category;
             ViewData["Description"] = $"Articles posted in the {category} category";
-            ViewData["prev"] = $"/blog/category/{category}/{page + 1}/";
-            ViewData["next"] = $"/blog/category/{category}/{(page <= 1 ? null : page - 1 + "/")}";
+            ViewData["prev"] = Url.Action("Index", new { category, page = page + 1, });
+            ViewData["next"] = Url.Action("Index", new { category, page = page <= 1 ? (int?)null : page - 1, });
             return View("~/Views/Blog/Index.cshtml", posts);
         }
 
