@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Contact Purple Lemon Photography";
+    ViewData["Description"] = $"How to schedule a consultation with Nikki Dukes, St. Louis wedding photographer";
+}
+
+@section head {
+    @*<link rel="stylesheet" href="~/css/contact.scss" />*@
+}
+
+<div class="contact">
+    <h1>Contact Purple Lemon Photography</h1>
+    <form action="mailto:nikki@purplelemonphotography.com" method="GET" >
+        <input type="submit" value="Email Me" />Send an Email
+    </form>
+    <nav class="nav__end">
+        @{
+            await Html.RenderPartialAsync("_Menu");
+        }
+    </nav>
+</div>
