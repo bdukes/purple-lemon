@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "About Purple Lemon Photography";
+    ViewData["Description"] = $"Nikki Dukes is a St. Louis wedding photographer";
+}
+
+@section head {
+    @*<link rel="stylesheet" href="~/css/about.scss" />*@
+}
+
+<div class="about">
+    <h1>About Purple Lemon Photography</h1>
+    <img class="lead" alt="Photo of Dukes family" src="https://1.bp.blogspot.com/-vF9AK5ieSyo/WDZSQLjUXVI/AAAAAAAARHo/QBeTpWAAfwELlK48_ffhww-obxeuqPZRQCKgB/s1600/IMG_20161113_123931946_HDR.jpg"/>
+    <nav class="nav__end">
+        @{
+            await Html.RenderPartialAsync("_Menu");
+        }
+    </nav>
+</div>
