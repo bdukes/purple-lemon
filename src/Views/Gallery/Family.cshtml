@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Family photos from Purple Lemon Photography";
+    ViewData["Description"] = $"View family photos from Nikki Dukes of Purple Lemon Photography";
+}
+
+@section head {
+    @*<link rel="stylesheet" href="~/css/gallery.scss" />*@
+}
+
+<div class="about">
+    <h1>Family</h1>
+
+    <img src="~/img/Family/Ada One Year-025.jpg" />
+    <img src="~/img/Family/Allison-027.jpg" />
+    <img src="~/img/Family/Asher-047.jpg" />
+    <img src="~/img/Family/baby benjamin-32.jpg" />
+
+    <nav class="nav__end">
+        @{
+            await Html.RenderPartialAsync("_Menu");
+        }
+    </nav>
+</div>

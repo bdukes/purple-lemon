@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Weddings from Purple Lemon Photography";
+    ViewData["Description"] = $"View wedding photos from Nikki Dukes of Purple Lemon Photography";
+}
+
+@section head {
+    @*<link rel="stylesheet" href="~/css/gallery.scss" />*@
+}
+
+<div class="about">
+    <h1>Weddings</h1>
+
+    <img src="~/img/Wedding/Amy _ David-136.jpg" />
+    <img src="~/img/Wedding/Amy _ David-171.jpg" />
+    <img src="~/img/Wedding/Bennett Wedding-034.jpg" />
+    <img src="~/img/Wedding/Bennett Wedding-269.jpg" />
+    <img src="~/img/Wedding/Bennett Wedding-305.jpg" />
+    <img src="~/img/Wedding/Bennett Wedding-247.jpg" />
+
+    <nav class="nav__end">
+        @{
+            await Html.RenderPartialAsync("_Menu");
+        }
+    </nav>
+</div>

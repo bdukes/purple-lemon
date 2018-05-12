@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Headshots from Purple Lemon Photography";
+    ViewData["Description"] = $"View headshot and senior photos from Nikki Dukes of Purple Lemon Photography";
+}
+
+@section head {
+    @*<link rel="stylesheet" href="~/css/gallery.scss" />*@
+}
+
+<div class="about">
+    <h1>Headshots</h1>
+
+    <img src="~/img/Headshots/Antionette-13.jpg" />
+    <img src="~/img/Headshots/Aubrey-20.jpg" />
+    <img src="~/img/Headshots/Christy-006.jpg" />
+    <img src="~/img/Headshots/Harold-8.jpg" />
+    <img src="~/img/Headshots/Janele Dance Headshots-89.jpg" />
+
+    <nav class="nav__end">
+        @{
+            await Html.RenderPartialAsync("_Menu");
+        }
+    </nav>
+</div>
