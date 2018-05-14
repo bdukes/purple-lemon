@@ -53,6 +53,8 @@ body {
 main {
     animation: fade-in 1s ease;
     grid-area: main;
+    //margin-top: 3em;
+    padding: 0 1.5em;
 
     @media (min-width: $width__large) {
         height: $height__main;
