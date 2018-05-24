@@ -53,12 +53,16 @@ body {
 main {
     animation: fade-in 1s ease;
     grid-area: main;
-    //margin-top: 3em;
     padding: 0 1.5em;
 
     @media (min-width: $width__large) {
         height: $height__main;
         overflow-y: auto;
+        padding: 3rem;
+
+        > * {
+            padding-bottom: 3.5rem;
+        }
     }
 }
 

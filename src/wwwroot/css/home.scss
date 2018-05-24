@@ -2,15 +2,12 @@
 
 
 .home {
-    padding: 1.5rem;
-
     img {
         padding: 0.25rem;
     }
 
     @media (min-width: $width__large) {
         $padding_home: 3rem;
-        padding: $padding_home;
         display: grid;
         grid-template-columns: 1fr 1fr;
 

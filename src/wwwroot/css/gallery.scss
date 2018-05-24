@@ -4,8 +4,6 @@
     h1 { display: none; }
 
     @media (min-width: $width__large) {
-        padding: 3rem;
-
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         grid-gap: 0.5rem;
