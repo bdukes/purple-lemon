@@ -4,75 +4,74 @@
 }
 
 @section head {
-    @*<link rel="stylesheet" href="~/css/investment.scss" />*@
+    <link rel="stylesheet" href="~/css/investment.scss" />
 }
 
 <div class="investment">
-    <h1>Your Investment with Purple Lemon Photography</h1>
-
     <div itemscope itemtype="http://schema.org/Service">
       <meta itemprop="serviceType" content="Photography" />
       <span itemprop="provider" itemscope itemtype="http://schema.org/LocalBusiness">
         <meta itemprop="name" content="Purple Lemon Photography" />
       </span>
 
-      <ul itemprop="hasOfferCatalog" itemscope itemtype="http://schema.org/OfferCatalog">
-        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/OfferCatalog">
-          <span itemprop="name">Portrait</span>
-          <ul itemprop="itemListElement" itemscope itemtype="http://schema.org/OfferCatalog">
-            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/Offer">
-              <span itemprop="itemOffered" itemscope itemtype="http://schema.org/Service">
-                <span itemprop="name">Mini</span>
-              </span>
-              <span itemprop="priceSpecification" itemscope itemtype="http://schema.org/PriceSpecification">
-                <meta itemprop="priceCurrency" content="USD" />
-                $<span itemprop="price">215</span>
-              </span>
-            </li>
-            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/Offer">
-              <span itemprop="itemOffered" itemscope itemtype="http://schema.org/Service">
-                <span itemprop="name">This Season</span>
-              </span>
-              <span itemprop="priceSpecification" itemscope itemtype="http://schema.org/PriceSpecification">
-                <meta itemprop="priceCurrency" content="USD" />
-                $<span itemprop="price">600</span>
-              </span>
-            </li>
-            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/Offer">
-              <span itemprop="itemOffered" itemscope itemtype="http://schema.org/Service">
-                <span itemprop="name">Custom</span>
-              </span>
-            </li>
-          </ul>
-        </li>
-        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/OfferCatalog">
-          <span itemprop="name">Wedding</span>
-          <ul itemprop="itemListElement" itemscope itemtype="http://schema.org/OfferCatalog">
-            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/Offer">
-              For
-              <span itemprop="itemOffered" itemscope itemtype="http://schema.org/Service">
-                <span itemprop="name">full-coverage events</span>,
-              </span>
-              our packages start at
-              <span itemprop="priceSpecification" itemscope itemtype="http://schema.org/PriceSpecification">
-                <meta itemprop="priceCurrency" content="USD" />
-                $<span itemprop="minPrice">1950</span>
-              </span>
-            </li>
-            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/Offer">
+      <div itemprop="hasOfferCatalog" itemscope itemtype="http://schema.org/OfferCatalog">
+        <div itemprop="itemListElement" itemscope itemtype="http://schema.org/OfferCatalog">
+            <h2 itemprop="name">Portrait</h2>
+                <div class="services" itemprop="itemListElement" itemscope itemtype="http://schema.org/OfferCatalog">
+                    <div itemprop="itemListElement" itemscope itemtype="http://schema.org/Offer">
+                        <img src='~/img/Family/Nye Family-4.jpg' class='image__wide' height='664' width='1000' />
+
+                        <span itemprop="itemOffered" itemscope itemtype="http://schema.org/Service">
+                            <span itemprop="name">Mini</span>
+                        </span>
+                        <span itemprop="priceSpecification" itemscope itemtype="http://schema.org/PriceSpecification">
+                            <meta itemprop="priceCurrency" content="USD"/>
+                            $<span itemprop="price">215</span>
+                        </span>
+                    </div>
+                    <div itemprop="itemListElement" itemscope itemtype="http://schema.org/Offer">
+                        <img src='~/img/Family/Pease-80.jpg' class='image__wide' height='664' width='1000' />
+                        <span itemprop="itemOffered" itemscope itemtype="http://schema.org/Service">
+                            <span itemprop="name">This Season</span>
+                        </span>
+                        <span itemprop="priceSpecification" itemscope itemtype="http://schema.org/PriceSpecification">
+                            <meta itemprop="priceCurrency" content="USD" />
+                            $<span itemprop="price">600</span>
+                        </span>
+                    </div>
+                    <div itemprop="itemListElement" itemscope itemtype="http://schema.org/Offer">
+                        <img src='~/img/Family/Neeb Family-007.jpg' class='image__wide' height='664' width='1000' />
+                        <span itemprop="itemOffered" itemscope itemtype="http://schema.org/Service">
+                            <span itemprop="name">Custom</span>
+                        </span>
+                    </div>
+            </div>
+        </div>
+        <div itemprop="itemListElement" itemscope itemtype="http://schema.org/OfferCatalog">
+          <h2 itemprop="name">Wedding</h2>
+          <div class="services" itemprop="itemListElement" itemscope itemtype="http://schema.org/OfferCatalog">
+              
+              <div itemprop="itemListElement" itemscope itemtype="http://schema.org/Offer">
+                  <img src='~/img/Wedding/Amy _ David-171.jpg' class='image__wide' height='664' width='1000' />
+                  <span itemprop="itemOffered" itemscope itemtype="http://schema.org/Service">
+                      <span itemprop="name">Full-coverage events</span>,
+                  </span>
+                  start at
+                  <span itemprop="priceSpecification" itemscope itemtype="http://schema.org/PriceSpecification">
+                      <meta itemprop="priceCurrency" content="USD" />
+                      $<span itemprop="minPrice">1950</span>
+                  </span>
+              </div>
+            <div itemprop="itemListElement" itemscope itemtype="http://schema.org/Offer">
+                <img src='~/img/Wedding/Bennett Wedding-034.jpg' class='image__wide' height='664' width='1000' />
               <span itemprop="itemOffered" itemscope itemtype="http://schema.org/Service">
                 <span itemprop="name">Custom packages</span>
               </span>
               available for smaller, more intimate weddings
-            </li>
-            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/Offer">
-              <span itemprop="itemOffered" itemscope itemtype="http://schema.org/Service">
-                <span itemprop="name">Custom</span>
-              </span>
-            </li>
-          </ul>
-        </li>
-      </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <nav class="nav__end">
