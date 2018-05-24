@@ -1,6 +1,14 @@
 ﻿<ul>
     <li><a asp-controller="About" asp-action="Index">About</a></li>
-    <li><a asp-controller="Gallery" asp-action="Wedding">Galleries</a></li>
+    <li>
+        <a asp-controller="Gallery" asp-action="Wedding">Galleries</a>
+        <ul>
+            <li><a asp-controller="Gallery" asp-action="Wedding">Weddings</a></li>
+            <li><a asp-controller="Gallery" asp-action="Family">Families</a></li>
+            <li><a asp-controller="Gallery" asp-action="EngagementCouples">Couples</a></li>
+            <li><a asp-controller="Gallery" asp-action="Headshots">Headshots</a></li>
+        </ul>
+    </li>
     <li><a asp-controller="Investment" asp-action="Index">Investment</a></li>
     <li><a asp-controller="Blog" asp-action="Index">Blog</a></li>
     <li><a asp-controller="Contact" asp-action="Index">Contact</a></li>

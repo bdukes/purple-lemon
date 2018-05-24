@@ -127,14 +127,41 @@ nav {
     .logo {
         display: block;
         //margin-bottom: 1.5em;
-        padding-bottom: 0.75em;
+        padding-bottom: 0.75rem;
         border-bottom: 1px solid $warm-gray;
     }
 
     li {
-        padding: 0.75em 0;
+        padding: 0.75rem 0;
+
         &:first-child {
-            padding-top: 1.5em;
+            padding-top: 1.5rem;
+        }
+
+        ul {
+            &::before, &::after {
+                content: '';
+                display: block;
+                border: solid 1px lighten($warm-gray, 5%);
+                width: 70%;
+                margin: 1.5rem auto 0;
+            }
+
+            &::before {
+                border-width: 1px 0 0 0;
+            }
+
+            &::after {
+                border-width: 0 0 1px 0;
+            }
+        }
+
+        li {
+            font-size: 0.8em;
+
+            &:last-child {
+                padding-bottom: 0;
+            }
         }
     }
 
