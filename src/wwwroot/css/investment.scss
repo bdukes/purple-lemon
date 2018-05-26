@@ -1,6 +1,7 @@
 ﻿@import "variables";
 
 .investment {
+
     .services {
         > * {
             padding-bottom: 1.25em;
@@ -8,7 +9,20 @@
         }
     }
 
+    h2 {
+        color: lighten($color__text, 30%);
+        font-size: 1.25em;
+    }
+
+    [itemprop="description"] {
+        display: block;
+        font-size: 0.75em;
+        text-transform: lowercase;
+    }
+
     @media (min-width: $width__large) {
+        padding: 0 12rem 3.5rem;
+
         .services {
             display: flex;
             justify-content: center;
