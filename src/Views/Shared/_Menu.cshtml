@@ -1,8 +1,10 @@
-﻿<ul>
+﻿<div class="js-expandmore">Menu</div>
+<ul class="js-to_expand">
     <li><a asp-controller="About" asp-action="Index">About</a></li>
     <li>
         <a asp-controller="Gallery" asp-action="Wedding">Galleries</a>
-        <ul>
+        <div class="js-expandmore"></div>
+        <ul class="js-to_expand">
             <li><a asp-controller="Gallery" asp-action="Wedding">Weddings</a></li>
             <li><a asp-controller="Gallery" asp-action="Family">Families</a></li>
             <li><a asp-controller="Gallery" asp-action="EngagementCouples">Couples</a></li>

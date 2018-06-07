@@ -21,6 +21,7 @@
 a:focus,
 a:active,
 input:focus,
+button:focus,
 textarea:focus {
     outline: 2px solid lighten($color__link, 20%);
 }
@@ -37,8 +38,17 @@ noscript p {
     border-top: double 4px $warm-gray;
     margin-top: 1.5em;
     padding-top: 0.75em;
+
     li {
         padding: 0.5em 0;
+    }
+
+    .js-expandmore {
+        display: none;
+    }
+
+    .expandmore__to_expand[data-hidden=true] {
+        display: block;
     }
 }
 

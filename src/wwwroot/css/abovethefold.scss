@@ -17,7 +17,7 @@ html {
     -ms-touch-action: manipulation;
     touch-action: manipulation;
     background-color: $color__background__outer;
-    
+
     padding: 3%;
     @media (min-width: $width__large) {
         padding: 1%;
@@ -92,7 +92,7 @@ h1, h2, h3, h4 {
 }
 
 small {
-    font-size: 0.75em;   
+    font-size: 0.75em;
 }
 
 ul, ol {
@@ -185,6 +185,45 @@ nav {
     }
 }
 
+.expandmore__to_expand[data-hidden=true] {
+    display: none;
+}
+.expandmore__button {
+    background: none;
+    font-size: inherit;
+    color: inherit;
+}
+li > .js-expandmore {
+    display: inline-block;
+    width: 2ex;
+
+    .expandmore__button {
+        border: none;
+        padding: 0;
+    }
+
+    .expandmore__symbol::before {
+        content: '+';
+    }
+
+    .is-opened .expandmore__symbol::before {
+        content: '−';
+    }
+}
+@media (min-width: $width__large) {
+    nav > .js-expandmore {
+        display: none;
+    }
+    nav > .expandmore__to_expand[data-hidden=true] {
+        display: block;
+    }
+
+    li > .expandmore__to_expand[data-hidden=true] {
+        display: none;
+    }
+}
+
+
 nav button {
     background: none;
     border: none;
@@ -195,10 +234,7 @@ nav button {
     border-bottom: 1px solid $warm-gray;
     padding: 0.75em 0;
     font-size: 0.85em;
-
-    @media (min-width: $width__large) {
-        display: none;
-    }
+    cursor: pointer;
 }
 
 nav ul {
@@ -224,7 +260,7 @@ nav ul {
     }
 
     nav img {
-        padding: 1em 0; 
+        padding: 1em 0;
 
         transition: opacity 0.5s ease-in-out;
         opacity: 0.3;

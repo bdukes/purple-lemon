@@ -94,15 +94,4 @@
 
         init();
     });
-
-    var navList = document.querySelector('.site-header nav > ul');
-    navList.classList.add('closed');
-    var button = document.createElement('button');
-    button.textContent = 'Menu';
-    navList.parentElement.insertBefore(button, navList);
-
-    button.addEventListener("click", function() {
-        navList.classList.toggle('closed');
-    });
-
 })(window, document);
