@@ -81,6 +81,12 @@
 
     <script src="~/js/van11y-accessible-hide-show-aria.min.js" async defer></script>
     <script src="~/js/site.js" async defer></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function onLoad() {
+        window.DOMContentLoaded = true;
+        document.removeEventListener("DOMContentLoaded", onLoad);
+    });
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
