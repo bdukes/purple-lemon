@@ -1,17 +1,33 @@
-﻿<div class="js-expandmore">Menu</div>
+﻿@functions {
+    string GetActiveClass(string controller, string action = "Index") {
+        var isMatch = controller.Equals(ViewContext.RouteData.Values["Controller"])
+            && action.Equals(ViewContext.RouteData.Values["Action"]);
+        return isMatch ? "active" : null;
+    }
+    string GetParentClass(string controller) {
+        var isMatch = controller.Equals(ViewContext.RouteData.Values["Controller"]);
+        return isMatch ? "active__parent" : null;
+    }
+    string GetIsOpenedClass(string controller) {
+        var isMatch = controller.Equals(ViewContext.RouteData.Values["Controller"]);
+        return isMatch ? "is-opened" : null;
+    }
+}
+
+<div class="js-expandmore">Menu</div>
 <ul class="js-to_expand">
-    <li><a asp-controller="About" asp-action="Index">About</a></li>
-    <li>
+    <li class="@GetActiveClass("About")"><a asp-controller="About" asp-action="Index">About</a></li>
+    <li class="@GetActiveClass("Gallery")">
         <a asp-controller="Gallery" asp-action="Wedding">Galleries</a>
         <div class="js-expandmore"></div>
-        <ul class="js-to_expand">
-            <li><a asp-controller="Gallery" asp-action="Wedding">Weddings</a></li>
-            <li><a asp-controller="Gallery" asp-action="Family">Families</a></li>
-            <li><a asp-controller="Gallery" asp-action="EngagementCouples">Couples</a></li>
-            <li><a asp-controller="Gallery" asp-action="Headshots">Headshots</a></li>
+        <ul class="js-to_expand @GetIsOpenedClass("Gallery")">
+            <li class="@GetActiveClass("Gallery", "Wedding")"><a asp-controller="Gallery" asp-action="Wedding">Weddings</a></li>
+            <li class="@GetActiveClass("Gallery", "Family")"><a asp-controller="Gallery" asp-action="Family">Families</a></li>
+            <li class="@GetActiveClass("Gallery", "EngagementCouples")"><a asp-controller="Gallery" asp-action="EngagementCouples">Couples</a></li>
+            <li class="@GetActiveClass("Gallery", "Headshots")"><a asp-controller="Gallery" asp-action="Headshots">Headshots</a></li>
         </ul>
     </li>
-    <li><a asp-controller="Investment" asp-action="Index">Investment</a></li>
-    <li><a asp-controller="Blog" asp-action="Index">Blog</a></li>
-    <li><a asp-controller="Contact" asp-action="Index">Contact</a></li>
+    <li class="@GetActiveClass("Investment")"><a asp-controller="Investment" asp-action="Index">Investment</a></li>
+    <li class="@GetActiveClass("Blog")"><a asp-controller="Blog" asp-action="Index">Blog</a></li>
+    <li class="@GetActiveClass("Contact")"><a asp-controller="Contact" asp-action="Index">Contact</a></li>
 </ul>
