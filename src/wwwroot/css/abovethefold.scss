@@ -185,9 +185,13 @@ nav {
     }
 }
 
-.expandmore__to_expand[data-hidden=true] {
+.js-to_expand, .js-to_expand.expandmore__to_expand[data-hidden=true] {
     display: none;
 }
+.js-to_expand.expandmore__to_expand {
+    display: block;
+}
+
 .expandmore__button {
     background: none;
     font-size: inherit;
@@ -214,7 +218,7 @@ li > .js-expandmore {
     nav > .js-expandmore {
         display: none;
     }
-    nav > .expandmore__to_expand[data-hidden=true] {
+    nav > .js-to_expand, nav > .js-to_expand.expandmore__to_expand[data-hidden=true] {
         display: block;
     }
 
