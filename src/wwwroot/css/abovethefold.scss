@@ -110,6 +110,10 @@ nav li {
 
 nav .active a {
     text-decoration: underline;
+    color: $brand-purple;
+}
+nav .active a:hover {
+    color: $brand-purple;
 }
 
 .site-header {
