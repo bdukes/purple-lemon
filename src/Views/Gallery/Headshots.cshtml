@@ -27,6 +27,13 @@
         <img src='~/img/Headshots/Sam Campbell-014.jpg' class='image__tall' height='1000' width='664' /> 
         <img src='~/img/Headshots/_DSC0676.jpg' class='image__tall' height='1000' width='664' /> 
 
+        <aside>
+            <h2>Thanks!</h2>
+            <p>
+            Thanks for checking out the headshots.  Maybe you want to view the <a class="action__seconday" asp-controller="Gallery" asp-action="EngagementCouples">Couples</a> gallery next, or learn more about your <a class="action__seconday" asp-controller="Investment" asp-action="Index">Investment</a> options.  Or, if you're ready, <a class="action__primary" asp-controller="Contact" asp-action="Index">Contact Us</a>
+            </p>
+        </aside>
+
         <nav class="nav__end">
             @{
                 await Html.RenderPartialAsync("_Menu");
