@@ -41,6 +41,9 @@ noscript p {
 
     li {
         padding: 0.5em 0;
+        li {
+            padding: 0.75rem 0;
+        }
     }
 
     > .js-expandmore {
