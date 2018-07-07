@@ -141,6 +141,7 @@ nav {
 
     li {
         padding: 0.75rem 0;
+        position: relative;
 
         &:first-child {
             padding-top: 1.5rem;
@@ -210,8 +211,8 @@ nav {
     color: inherit;
 }
 li > .js-expandmore {
-    display: inline-block;
-    width: 2ex;
+    position: absolute;
+    right: 20%;
 
     .expandmore__button {
         border: none;
@@ -220,10 +221,14 @@ li > .js-expandmore {
 
     .expandmore__symbol::before {
         content: '+';
+        display: inline-block;
+        height: 2ex;
+        width: 2ex;
+        transition: 0.25s ease-in-out;
     }
 
     .is-opened .expandmore__symbol::before {
-        content: '−';
+        transform: rotate(45deg);
     }
 }
 @media (min-width: $width__large) {
