@@ -2,6 +2,10 @@
 
 .investment {
 
+    .services-group + .services-group {
+        padding-top: 2em;
+    }
+
     .services {
         > * {
             padding-bottom: 1.25em;
@@ -22,6 +26,10 @@
 
     @media (min-width: $width__large) {
         padding: 0 12rem 3.5rem;
+
+        .services-group + .services-group {
+            padding-top: 0;
+        }
 
         .services {
             display: flex;
