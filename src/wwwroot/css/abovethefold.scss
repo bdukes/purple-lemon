@@ -214,9 +214,16 @@ li > .js-expandmore {
     position: absolute;
     right: 20%;
 
+    &, * {
+        display: inline-block;
+        height: 2ex;
+        width: 2ex;
+    }
+
     .expandmore__button {
         border: none;
         padding: 0;
+        line-height: 1;
     }
 
     .expandmore__symbol::before {
