@@ -1,22 +1,20 @@
 ﻿@import "variables";
 
 .gallery {
-    h1 { display: none; }
+    h1 {
+        text-align: center;
+        margin-top: -0.5em;
+        margin-bottom: 1em;
+
+        color: lighten($color__text, 30%);
+        font-size: 0.8em;
+    }
 
     @media (min-width: $width__large) {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         grid-gap: 0.5rem;
 
-        /*
-        display: flex;
-        flex-wrap: wrap;
-
-        justify-content: space-between;
-        img {
-            flex: 0 1 30%;
-            padding-bottom: 1rem;
-        }
-        */
+        h1 { display: none; }
     }
 }
