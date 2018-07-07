@@ -148,8 +148,10 @@ nav {
         }
 
         ul {
-            display: grid !important;
-            grid-template-columns: 1fr 1fr;
+            &.js-to_expand.expandmore__to_expand {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
 
             &::before, &::after {
                 content: '';
@@ -250,7 +252,6 @@ li > .js-expandmore {
         display: none;
     }
 }
-
 
 nav button {
     background: none;
