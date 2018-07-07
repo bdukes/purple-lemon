@@ -43,11 +43,11 @@ noscript p {
         padding: 0.5em 0;
     }
 
-    .js-expandmore {
+    > .js-expandmore {
         display: none;
     }
 
-    .expandmore__to_expand[data-hidden=true] {
+    > .expandmore__to_expand[data-hidden=true] {
         display: block;
     }
 }
