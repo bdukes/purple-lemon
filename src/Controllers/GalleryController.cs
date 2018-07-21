@@ -10,14 +10,14 @@ namespace Miniblog.Core.Controllers
         {
             return RedirectToActionPermanent(nameof(Wedding));
         }
-        
+
         [Route("/galleries/wedding")]
         [OutputCache(Profile = "default")]
         public IActionResult Wedding()
         {
             return View();
         }
-        
+
         [Route("/galleries/weddings")]
         [Route("/weddings")]
         [Route("/wedding")]
@@ -32,7 +32,7 @@ namespace Miniblog.Core.Controllers
         {
             return View();
         }
-        
+
         [Route("/galleries/engagement")]
         [Route("/galleries/engagements")]
         [Route("/galleries/couple")]
@@ -46,14 +46,14 @@ namespace Miniblog.Core.Controllers
         {
             return RedirectToActionPermanent(nameof(EngagementCouples));
         }
-        
+
         [Route("/galleries/family")]
         [OutputCache(Profile = "default")]
         public IActionResult Family()
         {
             return View();
         }
-        
+
         [Route("/galleries/families")]
         [Route("/families")]
         [Route("/family")]
@@ -61,24 +61,24 @@ namespace Miniblog.Core.Controllers
         {
             return RedirectToActionPermanent(nameof(Family));
         }
-        
-        [Route("/galleries/headshots")]
+
+        [Route("/galleries/portraits")]
         [OutputCache(Profile = "default")]
-        public IActionResult Headshots()
+        public IActionResult Portraits()
         {
             return View();
         }
-        
-        [Route("/galleries/headshot")]
+
+        [Route("/galleries/portrait")]
         [Route("/galleries/senior")]
         [Route("/galleries/seniors")]
-        [Route("/headshot")]
+        [Route("/portrait")]
         [Route("/senior")]
         [Route("/seniors")]
-        [Route("/headshots")]
-        public IActionResult HeadshotsRedirects()
+        [Route("/portraits")]
+        public IActionResult PortraitsRedirects()
         {
-            return RedirectToActionPermanent(nameof(Headshots));
+            return RedirectToActionPermanent(nameof(Portraits));
         }
     }
 }
