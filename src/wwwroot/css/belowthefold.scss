@@ -35,15 +35,14 @@ noscript p {
 }
 
 aside {
-    grid-column: 1 / span 4;
     background: $warm-gray;
     padding: 0.5rem;
     margin: 2rem auto;
     width: 80%;
     text-align: center;
 
-    font-family: Lora, Georgia, serif;    
-    
+    font-family: Lora, Georgia, serif;
+
     > * {
         border: 0.3rem solid $cool-gray;
     }

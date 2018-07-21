@@ -12,9 +12,18 @@
 
     @media (min-width: $width__large) {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         grid-gap: 0.5rem;
 
+        .image__tall {
+            grid-row-end: span 2;
+        }
+
         h1 { display: none; }
+
+        aside {
+            grid-column-start: 1;
+            grid-column-end: -1;
+        }
     }
 }
