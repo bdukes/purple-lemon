@@ -93,6 +93,23 @@
         <img src='~/img/Family/_DSC0614.jpg' class='image__tall' height='1000' width='664' />
 
 
+        <aside>
+            <ul>
+                <li>
+                    View the couples gallery
+                    <a class="action__primary" asp-controller="Gallery" asp-action="EngagementCouples"><span>See</span><span>More</span></a>
+                </li>
+                <li>
+                    Read the blog
+                    <a class="action__primary" asp-controller="Blog" asp-action="Index"><span>Read</span><span>More</span></a>
+                </li>
+                <li>
+                    Get started
+                    <a class="action__primary" asp-controller="Contact" asp-action="Index"><span>Contact</span><span>Us</span></a>
+                </li>
+            </ul>
+        </aside>
+
         <nav class="nav__end">
             @{
                 await Html.RenderPartialAsync("_Menu");

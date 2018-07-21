@@ -35,37 +35,49 @@ noscript p {
 }
 
 aside {
-    background: $warm-gray;
-    padding: 0.5rem;
+    $size__lemon: 50px;
+    $offset__lemon: 1rem;
+    background-image: url(../img/logo-139x139.png);
+    background-repeat: no-repeat;
+    background-position: center $offset__lemon;
+    background-size: $size__lemon;
+
+    padding: calc(2rem + #{$offset__lemon} + #{$size__lemon}) 0 0.5rem;
     margin: 2rem auto;
-    width: 80%;
     text-align: center;
+    border-top: 0.1rem solid $cool-gray;
 
-    font-family: Lora, Georgia, serif;
+    text-transform: lowercase;
 
-    > * {
-        border: 0.3rem solid $cool-gray;
-    }
-    h2 {
-        padding: 0.75rem 0 0.5rem;
-        border-bottom: none;
-    }
     p {
-        padding: 0.5rem 2.5rem 2.5rem;
-        border-top: none;
+        padding: 0.5rem 0 0.5rem;
     }
     .action__primary {
+        font-family: Lora, Georgia, serif;
+        font-weight: bold;
+        font-size: 1.1em;
+        text-transform: none;
+
         display: block;
         padding: 1em;
-        margin: 2em auto 0;
-        border: 0.2em solid lighten($brand-purple, 40%);
+        margin: 1em auto 0;
+        border: 0.1em solid $cool-gray;
 
-        background: $brand-purple;
-        color: white;
         text-decoration: none;
+        color: $brand-purple;
+        span + span {
+            color: $brand-green;
+        }
     }
 
     @media (min-width: $width__large) {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        width: 80%;
+        p {
+            padding-left: 2.5rem;
+            padding-right: 2.5rem;
+        }
         .action__primary {
             max-width: 10em;
         }
