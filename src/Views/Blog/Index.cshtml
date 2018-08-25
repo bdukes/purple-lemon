@@ -4,32 +4,39 @@
     int currentPage = int.Parse(ViewContext.RouteData.Values["page"] as string ?? "0");
 }
 
-@foreach (var post in Model)
-{
-    await Html.RenderPartialAsync("Post.cshtml", post);
-}
-
-<nav class="pagination container" aria-label="Pagination">
-    @if (Model.Any())
+<div class="blog">
+    @foreach (var post in Model)
     {
-        <a rel="prev" href="@ViewData["prev"]" title="Older posts">&laquo; Older</a>
-    }
-    @if (currentPage > 0)
-    {
-        <a rel="next" href="@ViewData["next"]" title="Newer posts">Newer &raquo;</a>
+        await Html.RenderPartialAsync("Post.cshtml", post);
     }
 
-    @section Head {
-        <link rel="stylesheet" href="~/css/blog.scss" />
+    <aside>
+    <nav class="pagination container" aria-label="Pagination">
         @if (Model.Any())
         {
-            <link rel="prev" href="@ViewData["prev"]" />
+            <a rel="prev" href="@ViewData["prev"]" title="Older posts">&laquo; Older</a>
         }
+        else
+        {
+            <a rel="prev" href="http://blog.purplelemonphotography.com/" title="Older posts">&laquo; Archive</a>
+        }
+
         @if (currentPage > 0)
         {
-            <link rel="next" href="@ViewData["next"]"  />
+            <a rel="next" href="@ViewData["next"]" title="Newer posts">Newer &raquo;</a>
         }
-    }
-</nav>
 
-@{await Html.RenderPartialAsync("_SocialSharing", ViewData["Title"]);}
+        @section Head {
+            <link rel="stylesheet" href="~/css/blog.scss" />
+            @if (Model.Any())
+            {
+                <link rel="prev" href="@ViewData["prev"]" />
+            }
+            @if (currentPage > 0)
+            {
+                <link rel="next" href="@ViewData["next"]" />
+            }
+        }
+    </nav>
+    </aside>
+</div>

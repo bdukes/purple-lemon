@@ -26,7 +26,7 @@ html {
 
 body {
     &, button {
-        font: 19px "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+        font: 19px $font-family__sans;
         line-height: $line-height;
         color: $color__text;
     }
@@ -89,6 +89,10 @@ img {
 
 h1, h2, h3, h4 {
     font-weight: normal;
+}
+
+p {
+    margin: 1em 0;
 }
 
 small {
