@@ -23,8 +23,10 @@
             grid-row-end: span 2;
         }
         .image__panorama {
-            grid-column-start: 1;
-            grid-column-end: -1;
+            grid-column-end: span 3;
+        }
+        .image__tall.image__before-panorama, .image__tall.image__after-panorama {
+            grid-row-end: auto;
         }
 
         h1 { display: none; }
