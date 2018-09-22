@@ -1,4 +1,4 @@
-﻿(function (window, document) {
+(function (window, document) {
 
     // polyfill for older browsers
     window.requestAnimationFrame = (function () {
@@ -89,7 +89,7 @@
             }
         }
 
-        window.addEventListener("scroll", scroll);
+        document.querySelector('main').addEventListener("scroll", scroll);
         window.addEventListener("resize", init);
 
         init();
