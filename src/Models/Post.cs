@@ -7,7 +7,12 @@ using System.Text.RegularExpressions;
 
 namespace Miniblog.Core.Models
 {
-    public class Post
+    using System.Linq;
+    using System.Xml;
+
+    using Microsoft.AspNetCore.Html;
+
+    public class Post : IEquatable<Post>
     {
         [Required]
         public string ID { get; set; } = DateTime.UtcNow.Ticks.ToString();
@@ -94,6 +99,54 @@ namespace Miniblog.Core.Models
                 result = Regex.Replace(result, @"\[youtube:(.*?)\]", m => string.Format(video, m.Groups[1].Value));
             }
             return result;
+        }
+
+        public HtmlString FindPrimaryImageTag()
+        {
+            var imgRegex = new Regex("<img[^>].+ />", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+            return (from Match match in imgRegex.Matches(this.Content)
+                    let img = LoadXml(match.Value)
+                    let srcNode = img.Attributes["src"]
+                    where !string.IsNullOrWhiteSpace(srcNode?.Value)
+                    let widthNode = img.Attributes["width"]
+                    let heightNode = img.Attributes["height"]
+                    let width = TryParseInt32(widthNode?.Value)
+                    let height = TryParseInt32(heightNode?.Value)
+                    let hasDimensions = width != null && height != null
+                    let isLandscape = hasDimensions && width > height
+                    orderby isLandscape ? 0 : 1
+                    select new HtmlString(match.Value))
+                .FirstOrDefault();
+
+            XmlNode LoadXml(string xml)
+            {
+                var doc = new XmlDocument();
+                doc.LoadXml("<root>" + xml + "</root>");
+
+                return doc.FirstChild.FirstChild;
+            }
+
+            int? TryParseInt32(string val)
+            {
+                return int.TryParse(val, out var result) ? result : default(int?);
+            }
+
+        }
+
+
+        public bool Equals(Post other)
+        {
+            return this.ID.Equals(other.ID, StringComparison.Ordinal);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Post post && this.Equals(post);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.ID.GetHashCode();
         }
     }
 }

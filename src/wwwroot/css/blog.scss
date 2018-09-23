@@ -6,6 +6,11 @@
         padding-left: 12em;
         padding-right: 12em;
     }
+
+    .related-posts {
+        display: flex;
+        > * { margin: 0 1em; }
+    }
 }
 
 .post {

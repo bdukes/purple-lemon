@@ -1,0 +1,18 @@
+﻿@model Post[]
+
+@if (Model != null && Model.Any())
+{
+<aside class="related-posts">
+        @foreach (var post in Model)
+        {
+            <a href="@post.GetLink()">
+                <figure>
+                    @post.FindPrimaryImageTag()
+                    <figcaption>
+                        @post.Title
+                    </figcaption>
+                </figure>
+            </a>
+        }
+</aside>
+}

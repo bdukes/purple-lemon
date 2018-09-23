@@ -68,6 +68,11 @@ namespace Miniblog.Core.Controllers
 
             if (post != null)
             {
+                var categoryPosts = await Task.WhenAll(
+                    post.Categories.Select(_blog.GetPostsByCategory)
+                );
+                var relatedPosts = categoryPosts.SelectMany(c => c).Distinct().Where(p => p.ID != post.ID).Take(3).ToArray();
+                ViewData["RelatedPosts"] = relatedPosts;
                 return View(post);
             }
 
