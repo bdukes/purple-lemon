@@ -21,4 +21,14 @@
             padding: 2em;
         }
     }
+
+    aside ul {
+        display: flex;
+        justify-content: space-between;
+        padding: 0;
+    }
+    aside li {
+        display: block;
+        width: 30%;
+    }
 }
