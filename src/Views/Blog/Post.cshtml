@@ -45,7 +45,6 @@
 
 @if (showFullPost)
 {
-    await Html.RenderPartialAsync("_SocialSharing", Model.Title);
     await Html.RenderPartialAsync("_RelatedPosts", ViewData["RelatedPosts"]);
 }
 
