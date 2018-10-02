@@ -5,6 +5,7 @@
     ViewData["Description"] = Model.Excerpt;
     bool showFullPost = ViewContext.RouteData.Values.ContainsKey("slug");
     string host = Context.Request.Scheme + "://" + Context.Request.Host;
+    bool isCodePreview = Model.Content.Contains("</code>");
 }
 
 @section Head {
@@ -32,7 +33,7 @@
             <ul class="categories">
                 @foreach (string cat in Model.Categories)
                 {
-                    <li itemprop="articleSection"><a asp-controller="Blog" asp-action="Category" asp-route-category="@cat.ToLowerInvariant()">@cat</a></li>
+                    <li itemprop="articleSection"><a asp-controller="Blog" asp-action="Category" asp-route-category="@cat.ToLowerInvariant()" asp-route-page="">@cat</a></li>
                 }
             </ul>
         }
@@ -46,11 +47,18 @@
 @if (showFullPost)
 {
     await Html.RenderPartialAsync("_RelatedPosts", ViewData["RelatedPosts"]);
+    @section Preload {
+        @if (isCodePreview)
+        {
+            <link rel="preload" href="~/lib/prism/prism.scss" as="style" />
+            <script src="~/lib/prism/prism.js" async defer></script>
+        }
+    }
 }
 
 @section Scripts {
-    @if (User.Identity.IsAuthenticated)
-    {
+@if (User.Identity.IsAuthenticated)
+{
         <script src="~/js/admin.js" async defer></script>
         <link rel="stylesheet" href="~/css/admin.scss" />
     }
