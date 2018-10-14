@@ -8,25 +8,20 @@
 }
 
 <div class="about">
-    <h1>Nikki and the Zest</h1>
     <img src="~/img/dukes-family.jpg" class="family-picture" />
     <p>
         Hello! We are the Dukes Family.  I’m Nikki, owner and lead photographer of Purple Lemon Photography. This is my husband, Brian, and our three sons. PLP is based in our home so you might get to meet this lively bunch when you come on over!
     </p><p>
-        I’ve been photographing professionally since about 2004, but have been using a camera as long as I can remember.  I graduated from Webster University in 2007 with degrees in Social Sciences and Photography.  We opened Purple Lemon Photography in the fall of 2008 and earned my designation as a Certified Professional Photographer in 2012.  Shortly after I earned my CPP, I also began serving as a liaison to the certification program, helping other photographers achieve and maintain professional standards.
+        I’ve been photographing professionally since about 2004, but have been using a camera for as long as I can remember.  I graduated from Webster University in 2007 with degrees in Social Sciences and Photography.  We opened Purple Lemon Photography in the fall of 2008 and earned my designation as a Certified Professional Photographer in 2012.  Shortly after I earned my CPP, I also began serving as a liaison to the certification program, helping other photographers achieve and maintain professional standards.
     </p><p>
         I can fondly remember my early days spent in the darkroom and working with film, but today my professional work is exclusively digital.
     </p><p>
         When you come into our home for a preview or consultation, you’ll get a taste of all that I love in my day to day life.  Our home is bright and colorful, and I spend endless hours cooking from scratch, spending time outside with my mud-loving boys, and engaging in relationships with those around us. We’d love the next one to be with you.
     </p>
 
-    <aside>
-    <ul>
-        <li>The Name<a class="action__primary" href="/blog/the-name"><span>Purple</span><span>Lemon</span></a></li>
-        <li>Community<a  class="action__primary" href="/blog/community"><span>Read</span><span>Stuff</span></a></li>
-        <li>Values & Responsibility <a class="action__primary" href="/blog/values-and-responsibility"><span>Read</span><span>Things</span></a></li>
-    </ul>
-    </aside>
+@{
+    await Html.RenderPartialAsync("_RelatedPosts", ViewData["RelatedPosts"]);
+}
 
     <nav class="logos">
         <a href="https://ppa.org" title="Professional Photographers of America, member"><img src="~/img/ppa-115x20.png" alt="Professional Photographers of America, logo" /></a>
