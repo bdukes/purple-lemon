@@ -1,0 +1,19 @@
+{
+    "name": "Purple Lemon Photography",
+    "short_name": "Purple Lemon",
+    "description": "Nikki Dukes is a St. Louis wedding and portrait photographer",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#6f2c91",
+    "background_color": "#6f2c91"
+}

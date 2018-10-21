@@ -21,8 +21,8 @@
   </options>
   <weblog>
     <ServiceName>MiniBlog.Core</ServiceName>
-    <imageUrl>img/icon16x16.png</imageUrl>
-    <watermarkImageUrl>img/icon16x16.png</watermarkImageUrl>
+    <imageUrl>favicon-16x16.png</imageUrl>
+    <watermarkImageUrl>favicon-16x16.png</watermarkImageUrl>
     <homepageLinkText>View your blog</homepageLinkText>
     <adminLinkText>Manage your blog</adminLinkText>
     <adminUrl><![CDATA[{blog-homepage-url}/login/]]></adminUrl>

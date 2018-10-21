@@ -22,15 +22,15 @@
     <meta property="og:title" content="@ViewData["Title"]" />
     <meta property="og:description" content="@ViewData["Description"]" />
     <meta property="og:url" content="@(host + Context.Request.Path)" />
-    <meta property="og:image" content="@host/img/icon512x512.png" />
-    <meta property="og:image:width" content="512" />
-    <meta property="og:image:height" content="512" />
 
-    <meta name="msapplication-square150x150logo" content="~/img/icon180x180.png" />
+    @* // TODO: show dynamic picture based on blog post *@
+    <meta property="og:image" content="@host/img/logo-618x139.png" />
+    <meta property="og:image:width" content="618" />
+    <meta property="og:image:height" content="139" />
 
-    <link rel="icon" type="image/png" sizes="16x16" href="~/img/icon16x16.png" />
-    <link rel="apple-touch-icon" href="~/img/icon180x180.png" />
-    <link rel="shortcut icon" href="~/img/icon16x16.png" />
+    @{
+        Html.RenderPartialAsync("_Favicons");
+    }
 
     <link rel="edituri" type="application/rsd+xml" title="RSD" href="~/rsd.xml" />
     <link rel="alternate" type="application/rss+xml" href="~/feed/rss/" />
