@@ -12,8 +12,14 @@
             "src": "/android-chrome-256x256.png",
             "sizes": "256x256",
             "type": "image/png"
+        },
+        {
+            "src": "img/logo-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
         }
     ],
     "theme_color": "#6f2c91",
-    "background_color": "#6f2c91"
+    "background_color": "#6f2c91",
+    "start_url": "/"
 }
