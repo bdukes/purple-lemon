@@ -22,13 +22,8 @@
         }
     }
 
-    aside ul {
+    .related-posts {
         display: flex;
-        justify-content: space-between;
-        padding: 0;
-    }
-    aside li {
-        display: block;
-        width: 30%;
+        > * { margin: 0 1em; }
     }
 }
