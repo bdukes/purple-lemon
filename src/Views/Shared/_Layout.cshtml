@@ -29,7 +29,7 @@
     <meta property="og:image:height" content="139" />
 
     @{
-        Html.RenderPartialAsync("_Favicons");
+        await Html.RenderPartialAsync("_Favicons");
     }
 
     <link rel="edituri" type="application/rsd+xml" title="RSD" href="~/rsd.xml" />
