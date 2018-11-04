@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace Miniblog.Core.Models
 {
+    using System.IO;
     using System.Linq;
     using System.Xml;
 
@@ -106,7 +107,7 @@ namespace Miniblog.Core.Models
             return result;
         }
 
-        public HtmlString FindPrimaryImageTag()
+        public HtmlString FindPrimaryImageTag(int? preferredWidth, int? preferredHeight)
         {
             var imgRegex = new Regex("<img[^>].+ />", RegexOptions.IgnoreCase | RegexOptions.Compiled);
             return (from Match match in imgRegex.Matches(this.Content)
@@ -120,8 +121,28 @@ namespace Miniblog.Core.Models
                     let hasDimensions = width != null && height != null
                     let isLandscape = hasDimensions && width > height
                     orderby isLandscape ? 0 : 1
-                    select new HtmlString(match.Value))
+                    select AsHtmlString(img))
                 .FirstOrDefault();
+
+            HtmlString AsHtmlString(XmlNode img)
+            {
+                if (preferredWidth != null && preferredHeight != null)
+                {
+                    string width = preferredWidth.Value.ToString(CultureInfo.InvariantCulture);
+                    string height = preferredHeight.Value.ToString(CultureInfo.InvariantCulture);
+                    img.Attributes["src"].Value = img.Attributes["src"].Value.Replace("/f_auto/", $"/f_auto,c_fill,w_{width},h_{height}/");
+                    img.Attributes["width"].Value = width;
+                    img.Attributes["height"].Value = height;
+                }
+
+                using (var stringWriter = new StringWriter())
+                using (var textWriter = new System.Xml.XmlTextWriter(stringWriter))
+                {
+                    img.WriteTo(textWriter);
+
+                    return new HtmlString(stringWriter.ToString());
+                }
+            }
 
             XmlNode LoadXml(string xml)
             {

@@ -2,17 +2,17 @@
 
 @if (Model != null && Model.Any())
 {
-<aside class="related-posts">
+    <aside class="related-posts">
         @foreach (var post in Model)
         {
             <a href="@post.GetLink()">
                 <figure>
-                    @post.FindPrimaryImageTag()
+                    @post.FindPrimaryImageTag(360, 240)
                     <figcaption>
                         @post.Title
                     </figcaption>
                 </figure>
             </a>
         }
-</aside>
+    </aside>
 }
