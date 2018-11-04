@@ -45,7 +45,7 @@ namespace Miniblog.Core
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddSingleton<IUserServices, BlogUserServices>();
-            services.AddSingleton<IBlogService, FileBlogService>();
+            services.AddSingleton<IBlogService, CloudinaryFileBlogService>();
             services.Configure<BlogSettings>(Configuration.GetSection("blog"));
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddMetaWeblog<MetaWeblogService>();
