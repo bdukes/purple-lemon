@@ -74,6 +74,9 @@ aside {
         padding-left: 0.5rem;
         padding-right: 0.5rem;
         width: 80%;
+        .about & {
+            width: 100%;
+        }
         p {
             padding-left: 2.5rem;
             padding-right: 2.5rem;
