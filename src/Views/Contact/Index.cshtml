@@ -4,24 +4,34 @@
 }
 
 @section head {
-    @*<link rel="stylesheet" href="~/css/contact.scss" />*@
+    <link rel="stylesheet" href="~/css/contact.scss" />
 }
 
 <div class="contact">
-    <h2>Booking, package information, general inquiries</h2>
-    <a href="mailto:nikki@purplelemonphotography.com">nikki@purplelemonphotography.com</a>
+    <section class="personal">
+        <h2>Nikki</h2>
+        <h3>Booking, package information, general inquiries</h3>
+        <img src="https://res.cloudinary.com/purple-lemon-photography/image/upload/f_auto/v1/nikki_lemon" alt="Photo collage of Nikki eating lemons" />
+        <a href="mailto:nikki@purplelemonphotography.com">nikki@purplelemonphotography.com</a>
+    </section>
+    <section class="personal">
+        <h2>Brian</h2>
+        <h3>Billing, galleries, and website inquiries</h3>
+        <img src="https://res.cloudinary.com/purple-lemon-photography/image/upload/f_auto/v1/brian_lemon" alt="Photo collage of Brian eating lemons" />
+        <a href="mailto:brian@purplelemonphotography.com">brian@purplelemonphotography.com</a>
+    </section>
 
-    <h2>Billing, galleries, and website inquiries</h2>
-    <a href="mailto:brian@purplelemonphotography.com">brian@purplelemonphotography.com</a>
-    
-    <div>
-    <a href="tel:+13148531934">314-853-1934</a>
-    <address>
-        8703 David Ave<br />
-        St. Louis, MO
-    </address>
-    </div>
-    Hours: By appointment only, availability changes seasonally
+    <section class="general-info">
+        <div>
+            <address>
+                8703 David Ave<br />
+                St. Louis, MO<br />
+                63114
+            </address>
+        </div>
+        <div><a href="tel:+13148531934">314-853-1934</a></div>
+        <div>Hours: availability changes seasonally, by appointment only</div>
+    </section>
 
     <nav class="nav__end">
         @{
