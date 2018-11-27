@@ -9,7 +9,10 @@
 
     .related-posts {
         display: flex;
-        > * { margin: 0 1em; }
+        > * {
+            flex: 1;
+            margin: 0 1em;
+        }
     }
 }
 
