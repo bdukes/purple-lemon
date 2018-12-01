@@ -6,19 +6,30 @@
         padding: 0.5rem;
     }
 
-    @media (min-width: $width__large) {
-        display: flex;
-        flex-wrap: wrap;
+    h3 {
+        font-size: 1rem;
+        min-height: 3em;
+    }
 
-        .personal {
-            flex-basis: 50%;
-            img {
-                max-width: 80%;
+    .personal a {
+        display: inline-block;
+        margin-bottom: 0.75em;
+    }
+
+    @media (min-width: $width__large) {
+        .contact-people {
+            display: flex;
+
+            .personal {
+                flex: 1;
+                &:first-child {
+                    margin-right: 1em;
+                }
             }
         }
 
         .general-info {
-            display: flex;
+            //display: flex;
             align-items: center;
             justify-items: stretch;
 
