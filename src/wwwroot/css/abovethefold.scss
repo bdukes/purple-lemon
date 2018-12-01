@@ -8,6 +8,12 @@
 }
 
 html {
+    &, button {
+        font: 19px $font-family__sans;
+        line-height: $line-height;
+        color: $color__text;
+    }
+
     min-height: 100%;
     position: relative;
     -moz-text-size-adjust: none;
@@ -25,12 +31,6 @@ html {
 }
 
 body {
-    &, button {
-        font: 19px $font-family__sans;
-        line-height: $line-height;
-        color: $color__text;
-    }
-
     background-color: $color__background;
     display: grid;
     grid: "header" auto "main" auto "footer" 3rem / auto;
