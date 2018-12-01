@@ -91,6 +91,7 @@
         }
 
         document.querySelector('main').addEventListener("scroll", scroll);
+        window.addEventListener('scroll', scroll);
         window.addEventListener("resize", init);
 
         init();
