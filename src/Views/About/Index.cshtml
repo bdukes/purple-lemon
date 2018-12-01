@@ -8,6 +8,8 @@
 }
 
 <div class="main-content about">
+    <div class='video'><iframe width='560' height='315' title='YouTube embed' src="https://www.youtube-nocookie.com/embed/gi-_MOwXom8?modestbranding=1&amp;hd=1&amp;rel=0&amp;theme=light" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
     <img src="https://res.cloudinary.com/purple-lemon-photography/image/upload/f_auto/v1/dukes-family" class="family-picture" />
     <p>
         Hello! We are the Dukes Family.  I’m Nikki, owner and lead photographer of Purple Lemon Photography. This is my husband, Brian, and our three sons. PLP is based in our home so you might get to meet this lively bunch when you come on over!
@@ -19,10 +21,6 @@
         When you come into our home for a preview or consultation, you’ll get a taste of all that I love in my day to day life.  Our home is bright and colorful, and I spend endless hours cooking from scratch, spending time outside with my mud-loving boys, and engaging in relationships with those around us. We’d love the next one to be with you.
     </p>
 
-@{
-    await Html.RenderPartialAsync("_RelatedPosts", ViewData["RelatedPosts"]);
-}
-
     <nav class="logos">
         <a href="https://ppa.org" title="Professional Photographers of America, member"><img src="https://res.cloudinary.com/purple-lemon-photography/image/upload/f_auto/v1/ppa-115x20" alt="Professional Photographers of America, logo" /></a>
         <a href="https://ppa.org/cpp" title="Certified Professional Photographer"><img src="https://res.cloudinary.com/purple-lemon-photography/image/upload/f_auto/v1/cpp-120x47" alt="Certified Professional Photographer logo" /></a>
@@ -30,6 +28,11 @@
         <a href="http://www.redthreadadoptionphotography.com/" title="Red Thread Adoption Photography, volunteer"><img src="https://res.cloudinary.com/purple-lemon-photography/image/upload/f_auto/v1/RTSBadge" alt="Red Thread Sessions logo" /></a>
         <a href="https://www.ppa.com/benefits/education/certification/cpp-liaisons" title="Certified Professional Photographer, certification liason"><img src="https://res.cloudinary.com/purple-lemon-photography/image/upload/f_auto/v1//cpp-liason" alt="Certified Professional Photographer, 2018 Certification Liason logo" /></a>
     </nav>
+
+@{
+    await Html.RenderPartialAsync("_RelatedPosts", ViewData["RelatedPosts"]);
+}
+
     <nav class="nav__end">
         @{
             await Html.RenderPartialAsync("_Menu");
