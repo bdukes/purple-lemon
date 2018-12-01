@@ -321,3 +321,10 @@ nav ul {
         }
     }
 }
+
+@media (max-width: $width__large) {
+    .hide-small { display: none; }
+}
+@media (min-width: $width__large) {
+    .show-small { display: none; }
+}

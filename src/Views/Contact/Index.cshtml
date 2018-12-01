@@ -11,28 +11,57 @@
     <div class="contact-people">
         <section class="personal">
             <h2>Nikki</h2>
-            <h3>Booking, package information, general inquiries</h3>
-            <a href="mailto:nikki@purplelemonphotography.com">nikki@purplelemonphotography.com</a>
             <img src="https://res.cloudinary.com/purple-lemon-photography/image/upload/f_auto/v1/nikki_lemon" alt="Photo collage of Nikki eating lemons" />
         </section>
         <section class="personal">
             <h2>Brian</h2>
-            <h3>Billing, galleries, and website inquiries</h3>
-            <a href="mailto:brian@purplelemonphotography.com">brian@purplelemonphotography.com</a>
             <img src="https://res.cloudinary.com/purple-lemon-photography/image/upload/f_auto/v1/brian_lemon" alt="Photo collage of Brian eating lemons" />
         </section>
     </div>
     <section class="general-info">
+        <div>Hours: changes seasonally, by appointment only</div>
+        <div>
+            <a href="mailto:nikki@purplelemonphotography.com">
+                <span class="show-small">Email</span>
+                <span class="show-small">Nikki</span>@*
+                *@<span class="hide-small">nikki@purplelemonphotography.com</span>@*
+            *@</a>
+            <a href="mailto:brian@purplelemonphotography.com">
+                <span class="show-small">Email</span>
+                <span class="show-small">Brian</span>
+                <span class="hide-small">brian@purplelemonphotography.com</span>@*
+            *@</a>
+        </div>
         <div>
             <address>
                 8703 David Ave
                 St. Louis, MO
                 63114
             </address>
-        </div>
-        <div><a href="tel:+13148531934">314-853-1934</a></div>
-        <div>Hours: availability changes seasonally, by appointment only</div>
+            <a href="tel:+13148531934">314-853-1934</a></div>
     </section>
+    <aside>
+        <ul>
+            <li>
+                Questions & Booking
+                <a class="action__primary" href="mailto:nikki@purplelemonphotography.com">
+                    <span>Email</span><span>Nikki</span>
+                </a>
+            </li>
+            <li>
+                Billing & Website
+                <a class="action__primary" href="mailto:brian@purplelemonphotography.com">
+                    <span>Email</span><span>Brian</span>
+                </a>
+            </li>
+            <li>
+                About Us
+                <a class="action__primary" asp-controller="About" asp-action="Index">
+                    <span>Read</span><span>More</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
 
     <nav class="nav__end">
         @{

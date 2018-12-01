@@ -2,8 +2,25 @@
 
 .contact {
     .general-info > * {
-        border: 1px solid $warm_gray;
+        text-align: center;
         padding: 0.5rem;
+        > * {
+            margin-right: 0.5rem;
+            + a {
+                border-left: 1px solid $cool-gray;
+                padding-left: 0.75rem;
+            }
+        }
+    }
+
+    address {
+        display: inline;
+        font-style: normal;
+    }
+
+    aside ul {
+        list-style: none;
+        padding-left: 0;
     }
 
     h3 {
@@ -25,6 +42,20 @@
                 &:first-child {
                     margin-right: 1em;
                 }
+            }
+        }
+
+        aside {
+            grid-column-start: 1;
+            grid-column-end: -1;
+            ul {
+                display: flex;
+                justify-content: space-between;
+                padding: 0;
+            }
+            li {
+                display: block;
+                width: 30%;
             }
         }
 

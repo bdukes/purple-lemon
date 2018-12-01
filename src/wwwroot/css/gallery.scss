@@ -10,6 +10,11 @@
         font-size: 0.8em;
     }
 
+    aside ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
     @media (min-width: $width__large) {
         padding: 0;
 
