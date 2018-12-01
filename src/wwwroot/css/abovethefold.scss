@@ -66,6 +66,14 @@ main {
     }
 }
 
+@media (min-width: $width__large) {
+    .main-content {
+        padding-top: 4em;
+        padding-left: 12em;
+        padding-right: 12em;
+    }
+}
+
 b, strong {
     font-weight: 600;
 }

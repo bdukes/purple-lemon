@@ -7,11 +7,13 @@
     }
 
     @media (min-width: $width__large) {
-        $padding_home: 3rem;
+        padding: 0;
+
         display: grid;
         grid-template-columns: 1fr 1fr;
 
         img {
+            $padding_home: 3rem;
             max-height: calc((#{$height__main} - (#{$padding_home} * 2)) / 2);
             justify-self: start;
 

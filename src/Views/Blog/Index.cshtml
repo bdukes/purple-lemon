@@ -4,7 +4,7 @@
     int currentPage = int.Parse(ViewContext.RouteData.Values["page"] as string ?? "0");
 }
 
-<div class="blog">
+<div class="main-content blog">
     @foreach (var post in Model)
     {
         await Html.RenderPartialAsync("Post.cshtml", post);
