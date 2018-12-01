@@ -142,18 +142,39 @@ namespace Miniblog.Core.Controllers
                 var fileNameNode = img.Attributes["data-filename"];
 
                 // The HTML editor creates base64 DataURIs which we'll have to convert to image files on disk
-                if (srcNode != null && fileNameNode != null)
+                if (srcNode == null || fileNameNode == null)
                 {
-                    var base64Match = base64Regex.Match(srcNode.Value);
-                    if (base64Match.Success)
-                    {
-                        byte[] bytes = Convert.FromBase64String(base64Match.Groups["base64"].Value);
-                        srcNode.Value = await _blog.SaveFile(bytes, fileNameNode.Value).ConfigureAwait(false);
+                    return;
+                }
 
-                        img.Attributes.Remove(fileNameNode);
-                        post.Content = post.Content.Replace(match.Value, img.OuterXml);
+                var base64Match = base64Regex.Match(srcNode.Value);
+                if (!base64Match.Success)
+                {
+                    return;
+                }
+
+                byte[] bytes = Convert.FromBase64String(base64Match.Groups["base64"].Value);
+                srcNode.Value = await _blog.SaveFile(bytes, fileNameNode.Value).ConfigureAwait(false);
+                img.Attributes.Remove(fileNameNode);
+
+                var widthNode = img.Attributes["width"];
+                var heightNode = img.Attributes["height"];
+                if (widthNode != null && heightNode != null)
+                {
+                    if (int.TryParse(widthNode.Value, out var width) && int.TryParse(heightNode.Value, out var height))
+                    {
+                        var classAttribute = doc.CreateAttribute("class");
+                        classAttribute.Value =
+                            height == width
+                                ? "image__square"
+                                : height > width
+                                    ? "image__tall"
+                                    : "image__wide";
+                        img.Attributes.Append(classAttribute);
                     }
                 }
+
+                post.Content = post.Content.Replace(match.Value, img.OuterXml);
             }
         }
 

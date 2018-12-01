@@ -44,6 +44,14 @@
         }
     }
 
+    img {
+        display: block;
+        margin: 0 auto;
+        &.image__tall {
+            padding: 0 6em;
+        }
+    }
+
     time {
         font-size: 0.85em;
         color: $color__subheading;

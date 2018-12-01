@@ -54,10 +54,11 @@
 
                         if (!(rect.bottom < 0 || rect.top - 100 - viewHeight >= 0)) {
                             img.onload = function (e) {
-                                e.target.className = "loaded";
+                                e.target.classList.add("loaded");
+                                e.target.classList.remove("notloaded");
                             };
 
-                            img.className = "notloaded";
+                            img.classList.add("notloaded");
                             img.src = img.getAttribute("data-src");
                             img.removeAttribute("data-src");
                             changed = true;
