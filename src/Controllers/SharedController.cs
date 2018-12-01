@@ -4,6 +4,12 @@ namespace Miniblog.Core.Controllers
 {
     public class SharedController : Controller
     {
+        [Route("{*url}", Order = int.MaxValue)]
+        public IActionResult RouteNotFound()
+        {
+            return View("Error", 404);
+        }
+
         public IActionResult Error()
         {
             return View(Response.StatusCode);

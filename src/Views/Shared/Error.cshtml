@@ -11,7 +11,7 @@
             statusmessage = "Forbidden";
             break;
         case 404:
-            statusmessage = "Page not found";
+            statusmessage = "This page is a lemon.";
             break;
         case 408:
             statusmessage = "The server timed out waiting for the request";
@@ -27,7 +27,11 @@
     ViewData["Title"] = statusmessage;
 }
 
-<div class="container">
-    <h1>Error @Model</h1>
+@section head {
+    <link rel="stylesheet" href="~/css/error.scss" />
+}
+
+<div class="main-content status-@statusCode">
+    <h1>Oops!</h1>
     <p>@statusmessage</p>
 </div>

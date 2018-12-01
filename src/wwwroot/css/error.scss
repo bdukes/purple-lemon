@@ -1,0 +1,10 @@
+@import "variables";
+
+.status-404 {
+    background-repeat: no-repeat;
+    background-image: url(https://res.cloudinary.com/purple-lemon-photography/image/upload/f_auto,fl_keep_attribution.lossy,q_auto/v1543638017/error-bg.jpg);
+    background-size: contain;
+
+    min-height: 100%;
+    color: $cool-gray;
+}
