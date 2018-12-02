@@ -131,10 +131,10 @@ nav .active a:hover {
 .site-header {
     grid-area: header;
     margin: 0.5em 0 0;
-    padding: 0 1.5em 1.5em;
+    padding: 0 1.5em;
 
     @media (min-width: $width__large) {
-        margin: 1.5em 0;
+        margin: 1.5em 0 0;
         padding-top: 1.5em;
         border-right: 1px solid $warm-gray;
     }
