@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <ApplicationInsightsResourceId>/subscriptions/789648e5-888a-40cc-b490-b95f58f43503/resourcegroups/purplelemonphotography/providers/microsoft.insights/components/purplelemonphotography</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/789648e5-888a-40cc-b490-b95f58f43503/resourcegroups/purplelemonphotography/providers/microsoft.insights/components/purplelemonphotography</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,6 +11,7 @@
     <PackageReference Include="CloudinaryDotNet" Version="1.4.1" />
     <PackageReference Include="LigerShark.WebOptimizer.Core" Version="1.0.197" />
     <PackageReference Include="LigerShark.WebOptimizer.Sass" Version="1.0.33-beta" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.0" />
     <PackageReference Include="Microsoft.SyndicationFeed.ReaderWriter" Version="1.0.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.0" />
@@ -24,6 +27,10 @@
     <Content Update="Views\Shared\_RelatedPosts.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
 </Project>
