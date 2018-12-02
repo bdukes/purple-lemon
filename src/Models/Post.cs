@@ -130,7 +130,11 @@ namespace Miniblog.Core.Models
                 {
                     string width = preferredWidth.Value.ToString(CultureInfo.InvariantCulture);
                     string height = preferredHeight.Value.ToString(CultureInfo.InvariantCulture);
-                    img.Attributes["src"].Value = img.Attributes["src"].Value.Replace("/f_auto/", $"/f_auto,c_fill,w_{width},h_{height}/");
+                    string src = Regex.Replace(
+                        img.Attributes["src"].Value,
+                        @"/([^/]*f_auto[^/]*)/",
+                        $"/$1,c_fill,w_{width},h_{height}/");
+                    img.Attributes["src"].Value = src;
                     img.Attributes["width"].Value = width;
                     img.Attributes["height"].Value = height;
                 }

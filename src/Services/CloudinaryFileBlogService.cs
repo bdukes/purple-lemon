@@ -46,7 +46,7 @@
                 .UseRootPath(this.cloudinary.Api.UseRootPath)
                 .Suffix(this.cloudinary.Api.Suffix)
                 .Version(uploadResult.Version)
-                .Transform(new Transformation().FetchFormat("auto"))
+                .Transform(new Transformation().FetchFormat("auto").Quality("auto").Flags("lossy", "keep_attribution"))
                 .BuildUrl(uploadResult.PublicId);
             return Task.FromResult(url);
         }
