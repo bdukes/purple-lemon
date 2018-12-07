@@ -68,6 +68,7 @@ namespace Miniblog.Core.Controllers
 
             if (post != null)
             {
+                ViewData["PageImageUrl"] = post.FindPrimaryImageUrl();
                 var categoryPosts = await Task.WhenAll(
                     post.Categories.Select(_blog.GetPostsByCategory)
                 );

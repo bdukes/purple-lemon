@@ -26,10 +26,15 @@
     <meta property="og:description" content="@ViewData["Description"]" />
     <meta property="og:url" content="@(host + Context.Request.Path)" />
 
-    @* // TODO: show dynamic picture based on blog post *@
-    <meta property="og:image" content="@host/img/logo-618x139.png" />
-    <meta property="og:image:width" content="618" />
-    <meta property="og:image:height" content="139" />
+    @if (!string.IsNullOrEmpty(ViewData["PageImageUrl"] as string)) {
+        <meta property="og:image" content="@ViewData["PageImageUrl"]" />
+        @if (!string.IsNullOrEmpty(ViewData["PageImageWidth"] as string)) {
+            <meta property="og:image:width" content="@ViewData["PageImageWidth"]" />
+        }
+        @if (!string.IsNullOrEmpty(ViewData["PageImageHeight"] as string)) {
+            <meta property="og:image:height" content="@ViewData["PageImageHeight"]" />
+        }
+    }
 
     @{
         await Html.RenderPartialAsync("_Favicons");

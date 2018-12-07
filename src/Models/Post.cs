@@ -107,62 +107,35 @@ namespace Miniblog.Core.Models
             return result;
         }
 
-        public HtmlString FindPrimaryImageTag(int? preferredWidth, int? preferredHeight)
+        public string FindPrimaryImageUrl()
         {
-            var imgRegex = new Regex("<img[^>].+ />", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-            return (from Match match in imgRegex.Matches(this.Content)
-                    let img = LoadXml(match.Value)
-                    let srcNode = img.Attributes["src"]
-                    where !string.IsNullOrWhiteSpace(srcNode?.Value)
-                    let widthNode = img.Attributes["width"]
-                    let heightNode = img.Attributes["height"]
-                    let width = TryParseInt32(widthNode?.Value)
-                    let height = TryParseInt32(heightNode?.Value)
-                    let hasDimensions = width != null && height != null
-                    let isLandscape = hasDimensions && width > height
-                    orderby isLandscape ? 0 : 1
-                    select AsHtmlString(img))
-                .FirstOrDefault();
-
-            HtmlString AsHtmlString(XmlNode img)
-            {
-                if (preferredWidth != null && preferredHeight != null)
-                {
-                    string width = preferredWidth.Value.ToString(CultureInfo.InvariantCulture);
-                    string height = preferredHeight.Value.ToString(CultureInfo.InvariantCulture);
-                    string src = Regex.Replace(
-                        img.Attributes["src"].Value,
-                        @"/([^/]*f_auto[^/]*)/",
-                        $"/$1,c_fill,w_{width},h_{height}/");
-                    img.Attributes["src"].Value = src;
-                    img.Attributes["width"].Value = width;
-                    img.Attributes["height"].Value = height;
-                }
-
-                using (var stringWriter = new StringWriter())
-                using (var textWriter = new System.Xml.XmlTextWriter(stringWriter))
-                {
-                    img.WriteTo(textWriter);
-
-                    return new HtmlString(stringWriter.ToString());
-                }
-            }
-
-            XmlNode LoadXml(string xml)
-            {
-                var doc = new XmlDocument();
-                doc.LoadXml("<root>" + xml + "</root>");
-
-                return doc.FirstChild.FirstChild;
-            }
-
-            int? TryParseInt32(string val)
-            {
-                return int.TryParse(val, out var result) ? result : default(int?);
-            }
-
+            return FindPrimaryImageNode()?.Attributes?["src"]?.Value;
         }
 
+        public HtmlString FindPrimaryImageTag(int? preferredWidth, int? preferredHeight)
+        {
+            var img = FindPrimaryImageNode();
+            if (preferredWidth != null && preferredHeight != null)
+            {
+                string width = preferredWidth.Value.ToString(CultureInfo.InvariantCulture);
+                string height = preferredHeight.Value.ToString(CultureInfo.InvariantCulture);
+                string src = Regex.Replace(
+                    img.Attributes["src"].Value,
+                    @"/([^/]*f_auto[^/]*)/",
+                    $"/$1,c_fill,w_{width},h_{height}/");
+                img.Attributes["src"].Value = src;
+                img.Attributes["width"].Value = width;
+                img.Attributes["height"].Value = height;
+            }
+
+            using (var stringWriter = new StringWriter())
+            using (var textWriter = new System.Xml.XmlTextWriter(stringWriter))
+            {
+                img.WriteTo(textWriter);
+
+                return new HtmlString(stringWriter.ToString());
+            }
+        }
 
         public bool Equals(Post other)
         {
@@ -177,6 +150,37 @@ namespace Miniblog.Core.Models
         public override int GetHashCode()
         {
             return this.ID.GetHashCode();
+        }
+
+        private XmlNode FindPrimaryImageNode()
+        {
+            var imgRegex = new Regex("<img[^>].+ />", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+            return (from Match match in imgRegex.Matches(this.Content)
+                    let img = LoadXml(match.Value)
+                    let srcNode = img.Attributes["src"]
+                    where !string.IsNullOrWhiteSpace(srcNode?.Value)
+                    let widthNode = img.Attributes["width"]
+                    let heightNode = img.Attributes["height"]
+                    let width = TryParseInt32(widthNode?.Value)
+                    let height = TryParseInt32(heightNode?.Value)
+                    let hasDimensions = width != null && height != null
+                    let isLandscape = hasDimensions && width > height
+                    orderby isLandscape ? 0 : 1
+                    select img)
+                .FirstOrDefault();
+
+            XmlNode LoadXml(string xml)
+            {
+                var doc = new XmlDocument();
+                doc.LoadXml("<root>" + xml + "</root>");
+
+                return doc.FirstChild.FirstChild;
+            }
+
+            int? TryParseInt32(string val)
+            {
+                return int.TryParse(val, out var result) ? result : default(int?);
+            }
         }
     }
 }
