@@ -65,25 +65,22 @@ namespace Miniblog.Core.Controllers
         public async Task<IActionResult> Post(string slug)
         {
             var post = await _blog.GetPostBySlug(slug);
-
-            if (post != null)
+            if (post == null)
             {
-                ViewData["PageImageUrl"] = post.FindPrimaryImageUrl();
-                var categoryPosts = await Task.WhenAll(
-                    post.Categories.Select(_blog.GetPostsByCategory)
-                );
-                var relatedPosts = categoryPosts.SelectMany(c => c).Distinct().Where(p => p.ID != post.ID).Take(3).ToList();
-                if (relatedPosts.Count < 3)
-                {
-                    var weddingPosts = await _blog.GetPostsByCategory("wedding");
-                    relatedPosts.AddRange(weddingPosts.Take(3 - relatedPosts.Count));
-                }
-
-                ViewData["RelatedPosts"] = relatedPosts.ToArray();
-                return View(post);
+                return this.NotFound();
             }
 
-            return NotFound();
+            var details = post.FindPrimaryImageDetails();
+            this.ViewData["PageImageUrl"] = details.url;
+            if (!string.IsNullOrWhiteSpace(details.height) && !string.IsNullOrWhiteSpace(details.width))
+            {
+                this.ViewData["PageImageHeight"] = details.height;
+                this.ViewData["PageImageWidth"] = details.width;
+            }
+
+            this.ViewData["RelatedPosts"] = await this.GetRelatedPosts(post);
+            return this.View(post);
+
         }
 
         [Route("/blog/edit/{id?}")]
@@ -254,6 +251,27 @@ namespace Miniblog.Core.Controllers
             await _blog.SavePost(post);
 
             return Redirect(post.GetEncodedLink() + "#comments");
+        }
+
+        [NonAction]
+        private async Task<Post[]> GetRelatedPosts(Post post)
+        {
+            var categoryPosts = await Task.WhenAll(
+                post.Categories.Select(_blog.GetPostsByCategory)
+            );
+            var relatedPosts = categoryPosts
+                .SelectMany(c => c)
+                .Distinct()
+                .Where(p => p.ID != post.ID)
+                .Take(3)
+                .ToList();
+            if (relatedPosts.Count < 3)
+            {
+                var weddingPosts = await _blog.GetPostsByCategory("wedding");
+                relatedPosts.AddRange(weddingPosts.Take(3 - relatedPosts.Count));
+            }
+
+            return relatedPosts.ToArray();
         }
     }
 }

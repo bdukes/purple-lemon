@@ -107,9 +107,18 @@ namespace Miniblog.Core.Models
             return result;
         }
 
-        public string FindPrimaryImageUrl()
+        public (string url, string height, string width) FindPrimaryImageDetails()
         {
-            return FindPrimaryImageNode()?.Attributes?["src"]?.Value;
+            var imageNode = this.FindPrimaryImageNode();
+            if (imageNode == null)
+            {
+                return default((string url, string height, string width));
+            }
+
+            var src = imageNode.Attributes["src"]?.Value;
+            var height = imageNode.Attributes["height"]?.Value;
+            var width = imageNode.Attributes["width"]?.Value;
+            return (src, height, width);
         }
 
         public HtmlString FindPrimaryImageTag(int? preferredWidth, int? preferredHeight)
