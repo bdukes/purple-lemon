@@ -168,13 +168,16 @@ namespace Miniblog.Core.Models
                     let img = LoadXml(match.Value)
                     let srcNode = img.Attributes["src"]
                     where !string.IsNullOrWhiteSpace(srcNode?.Value)
+                    let classNode = img.Attributes["class"]
+                    let classes = classNode?.Value?.Split(' ', StringSplitOptions.RemoveEmptyEntries) ?? new string[0]
+                    let isPrimary = classes.Contains("image__primary", StringComparer.OrdinalIgnoreCase)
                     let widthNode = img.Attributes["width"]
                     let heightNode = img.Attributes["height"]
                     let width = TryParseInt32(widthNode?.Value)
                     let height = TryParseInt32(heightNode?.Value)
                     let hasDimensions = width != null && height != null
                     let isLandscape = hasDimensions && width > height
-                    orderby isLandscape ? 0 : 1
+                    orderby isPrimary ? 0 : isLandscape ? 1 : 2
                     select img)
                 .FirstOrDefault();
 

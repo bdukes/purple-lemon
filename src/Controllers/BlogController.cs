@@ -167,14 +167,27 @@ namespace Miniblog.Core.Controllers
                 {
                     if (int.TryParse(widthNode.Value, out var width) && int.TryParse(heightNode.Value, out var height))
                     {
-                        var classAttribute = doc.CreateAttribute("class");
-                        classAttribute.Value =
+                        var classAttribute = img.Attributes["class"];
+                        if (classAttribute == null)
+                        {
+                            classAttribute = doc.CreateAttribute("class");
+                            img.Attributes.Append(classAttribute);
+                        }
+
+                        var ratioClass =
                             height == width
                                 ? "image__square"
                                 : height > width
                                     ? "image__tall"
                                     : "image__wide";
-                        img.Attributes.Append(classAttribute);
+                        if (string.IsNullOrWhiteSpace(classAttribute.Value))
+                        {
+                            classAttribute.Value = ratioClass;
+                        }
+                        else
+                        {
+                            classAttribute.Value += ' ' + ratioClass;
+                        }
                     }
                 }
 
