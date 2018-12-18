@@ -148,13 +148,13 @@ namespace Miniblog.Core.Controllers
                 // The HTML editor creates base64 DataURIs which we'll have to convert to image files on disk
                 if (srcNode == null || fileNameNode == null)
                 {
-                    return;
+                    continue;
                 }
 
                 var base64Match = base64Regex.Match(srcNode.Value);
                 if (!base64Match.Success)
                 {
-                    return;
+                    continue;
                 }
 
                 byte[] bytes = Convert.FromBase64String(base64Match.Groups["base64"].Value);
