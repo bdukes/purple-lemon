@@ -96,7 +96,8 @@
 
     img {
         &.image__tall {
-            padding: 0 6em;
+            max-height: 85vh;
+            width: auto;
         }
     }
 }
