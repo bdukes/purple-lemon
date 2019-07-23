@@ -34,7 +34,7 @@ namespace Miniblog.Core
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseKestrel(a => a.AddServerHeader = false);
+                .ConfigureKestrel(a => a.AddServerHeader = false);
 
         public IConfiguration Configuration { get; }
 
@@ -42,7 +42,7 @@ namespace Miniblog.Core
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddSingleton<IUserServices, BlogUserServices>();
             services.AddSingleton<IBlogService, CloudinaryFileBlogService>();
