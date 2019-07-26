@@ -134,7 +134,7 @@ namespace Miniblog.Core.Controllers
         [NonAction]
         private async Task SaveFilesToDisk(Post post)
         {
-            var imgRegex = new Regex("<img[^>].+ />", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+            var imgRegex = new Regex("<img [^>]+ />", RegexOptions.IgnoreCase | RegexOptions.Compiled);
             var base64Regex = new Regex("data:[^/]+/(?<ext>[a-z]+);base64,(?<base64>.+)", RegexOptions.IgnoreCase);
 
             foreach (Match match in imgRegex.Matches(post.Content))
