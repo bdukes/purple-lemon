@@ -136,6 +136,13 @@ namespace Miniblog.Core.Controllers
         {
             var imgRegex = new Regex("<img [^>]+ />", RegexOptions.IgnoreCase | RegexOptions.Compiled);
             var base64Regex = new Regex("data:[^/]+/(?<ext>[a-z]+);base64,(?<base64>.+)", RegexOptions.IgnoreCase);
+            string[] allowedExtensions = new [] {
+              ".jpg",
+              ".jpeg",
+              ".gif",
+              ".png",
+              ".webp"
+            };
 
             foreach (Match match in imgRegex.Matches(post.Content))
             {
@@ -148,6 +155,14 @@ namespace Miniblog.Core.Controllers
 
                 // The HTML editor creates base64 DataURIs which we'll have to convert to image files on disk
                 if (srcNode == null || fileNameNode == null)
+                {
+                    continue;
+                }
+
+                string extension = System.IO.Path.GetExtension(fileNameNode.Value);
+
+                // Only accept image files
+                if (!allowedExtensions.Contains(extension, StringComparer.OrdinalIgnoreCase))
                 {
                     continue;
                 }
