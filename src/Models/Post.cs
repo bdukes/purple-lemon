@@ -163,7 +163,7 @@ namespace Miniblog.Core.Models
 
         private XmlNode FindPrimaryImageNode()
         {
-            var imgRegex = new Regex("<img[^>].+ />", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+            var imgRegex = new Regex("<img [^>]+/>", RegexOptions.IgnoreCase | RegexOptions.Compiled);
             return (from Match match in imgRegex.Matches(this.Content)
                     let img = LoadXml(match.Value)
                     let srcNode = img.Attributes["src"]
