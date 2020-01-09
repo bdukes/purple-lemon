@@ -19,7 +19,7 @@ namespace Miniblog.Core.Controllers
         public async Task<IActionResult> Index()
         {
             var posts = await _blog.GetPostsByCategory("purple lemon");
-            ViewData["RelatedPosts"] = posts.ToArray();
+            ViewData["RelatedPosts"] = posts.TakeLast(3).ToArray();
             return View();
         }
     }
