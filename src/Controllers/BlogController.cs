@@ -31,11 +31,18 @@ namespace Miniblog.Core.Controllers
         [HttpGet]
         public async Task<IActionResult> Index([FromRoute]int page = 0)
         {
-            var posts = await _blog.GetPosts(_settings.Value.PostsPerPage, _settings.Value.PostsPerPage * page);
+            // get all published posts.
+            var allPosts = await _blog.GetPosts();
+
+            // apply paging filter.
+            var posts = allPosts.Skip(_settings.Value.PostsPerPage * page).Take(_settings.Value.PostsPerPage);
+
+            ViewData["TotalPostCount"] = allPosts.Count();
             ViewData["Title"] = _manifest.Name;
             ViewData["Description"] = _manifest.Description;
             ViewData["prev"] = Url.Action("Index", new { page = page + 1 });
             ViewData["next"] = Url.Action("Index", new { page = page <= 1 ? (int?)null : page - 1 });
+
             return View("~/Views/Blog/Index.cshtml", posts);
         }
 
@@ -44,7 +51,13 @@ namespace Miniblog.Core.Controllers
         [HttpGet]
         public async Task<IActionResult> Category(string category, int page = 0)
         {
-            var posts = (await _blog.GetPostsByCategory(category)).Skip(_settings.Value.PostsPerPage * page).Take(_settings.Value.PostsPerPage);
+            // get all posts for the selected category.
+            var allPosts = await _blog.GetPostsByCategory(category);
+
+            // apply paging filter.
+            var posts = allPosts.Skip(_settings.Value.PostsPerPage * page).Take(_settings.Value.PostsPerPage);
+
+            ViewData["TotalPostCount"] = allPosts.Count();
             ViewData["Title"] = _manifest.Name + " " + category;
             ViewData["Description"] = $"Articles posted in the {category} category";
             ViewData["prev"] = Url.Action("Index", new { category, page = page + 1, });

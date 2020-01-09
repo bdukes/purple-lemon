@@ -23,12 +23,23 @@ namespace Miniblog.Core.Services
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly string _folder;
 
-        public FileBlogService(IHostingEnvironment env, IHttpContextAccessor contextAccessor)
+        public FileBlogService(IWebHostEnvironment env, IHttpContextAccessor contextAccessor)
         {
             _folder = Path.Combine(env.WebRootPath, POSTS);
             _contextAccessor = contextAccessor;
 
             Initialize();
+        }
+
+        // overload for getPosts method to retrieve all posts.
+        public virtual Task<IEnumerable<Post>> GetPosts()
+        {
+            bool isAdmin = IsAdmin();
+
+            var posts = _cache
+                .Where(p => p.PubDate <= DateTime.UtcNow && (p.IsPublished || isAdmin));
+
+            return Task.FromResult(posts);
         }
 
         public virtual Task<IEnumerable<Post>> GetPosts(int count, int skip = 0)

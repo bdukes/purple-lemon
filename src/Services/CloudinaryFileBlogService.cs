@@ -14,7 +14,7 @@
     {
         private readonly Cloudinary cloudinary = new Cloudinary();
 
-        public CloudinaryFileBlogService(IHostingEnvironment env, IHttpContextAccessor contextAccessor)
+        public CloudinaryFileBlogService(IWebHostEnvironment env, IHttpContextAccessor contextAccessor)
             : base(env, contextAccessor)
         {
         }
