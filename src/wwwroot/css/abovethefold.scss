@@ -302,13 +302,6 @@ nav ul {
 
     nav img {
         padding: 1em 0;
-
-        transition: opacity 0.5s ease-in-out;
-        opacity: 0.3;
-
-        &:hover {
-            opacity: 1;
-        }
     }
 
     @media (min-width: $width__large) {
