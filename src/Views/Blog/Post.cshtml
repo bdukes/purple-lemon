@@ -1,38 +1,38 @@
 @model Post
 @inject IOptionsSnapshot<BlogSettings> settings
 @{
-    ViewData[Constants.Title] = Model.Title;
-    ViewData[Constants.Description] = Model.Excerpt;
-    bool showFullPost = ViewContext.RouteData.Values.ContainsKey(Constants.slug);
-    string host = $"{Context.Request.Scheme}://{Context.Request.Host}";
-    bool isCodePreview = Model.Content.Contains("</code>");
+	ViewData[Constants.Title] = Model.Title;
+	ViewData[Constants.Description] = Model.Excerpt;
+	bool showFullPost = ViewContext.RouteData.Values.ContainsKey(Constants.slug);
+	string host = $"{Context.Request.Scheme}://{Context.Request.Host}";
+	bool isCodePreview = Model.Content.Contains("</code>");
 }
 
 @section Head {
-    <link rel="canonical" href="@(host + Model.GetLink())" />
     <link rel="stylesheet" href="~/css/blog.scss" />
+	<link rel="canonical" href="@(host + Model.GetLink())" />
 }
 
 <article class="post container @(showFullPost ? "main-content post__full" : "post__excerpt")" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
-    <header>
-        <h1 itemprop="name headline"><a href="@Model.GetLink()" rel="canonical" itemprop="url">@Model.Title</a></h1>
-        <time datetime="@Model.PubDate.ToString("s")" itemprop="datePublished">Published @Model.PubDate.ToString("MMM d, yyyy")</time>
-        @if (User.Identity.IsAuthenticated)
-        {
-            <a asp-controller="Blog" asp-action="edit" asp-route-id="@Model.ID" title="Edit the post">Edit post</a>
-        }
-    </header>
+	<header>
+		<h1 itemprop="name headline"><a href="@Model.GetLink()" rel="canonical" itemprop="url">@Model.Title</a></h1>
+		<time datetime="@Model.PubDate.ToString("s")" itemprop="datePublished">Published @Model.PubDate.ToString("MMM d, yyyy")</time>
+		@if (User.Identity!.IsAuthenticated)
+		{
+			<a asp-controller="Blog" asp-action="edit" asp-route-id="@Model.ID" title="Edit the post">Edit post</a>
+		}
+	</header>
 
-    <div itemprop="articleBody mainEntityOfPage" cdnify>
-        @if (showFullPost || settings.Value.ListView == PostListView.FullPosts)
-        {
-            @Html.Raw(Model.RenderContent())
-        }
-        else if (settings.Value.ListView == PostListView.TitlesAndExcerpts)
-        {
-            @Html.Raw(Model.Excerpt)
-        }
-    </div>
+	<div itemprop="articleBody mainEntityOfPage" cdnify>
+		@if (showFullPost || settings.Value.ListView == PostListView.FullPosts)
+		{
+			@Html.Raw(Model.RenderContent())
+		}
+		else if (settings.Value.ListView == PostListView.TitlesAndExcerpts)
+		{
+			@Html.Raw(Model.Excerpt)
+		}
+	</div>
 
     <footer>
         @if (Model.Categories.Any())
@@ -51,6 +51,18 @@
             </a>
         }
 
+		@if (settings.Value.DisplayComments)
+		{
+			<svg width="24" height="24" aria-hidden="true" role="img" aria-labelledby="_comments-@Model.ID" focusable="false" viewBox="0 0 24 24">
+				<title id="_comments-@Model.ID">Comments</title>
+				<path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z" fill="gray"></path>
+				<path d="M0 0h24v24H0z" fill="none"></path>
+			</svg>
+			<a href="@Model.GetLink()#comments" itemprop="discussionUrl" title="Go to the comments section">
+				<span itemprop="commentCount">@Model.Comments.Count</span> @(Model.Comments.Count == 1 ? "comment" : "comments")
+			</a>
+		}
+
 		<meta itemprop="author" content="@settings.Value.Owner" />
 		<meta itemprop="dateModified" content="@Model.LastModified.ToString("s")" />
 		<meta itemprop="mainEntityOfPage" content="@(host + Model.GetLink())" />
@@ -65,25 +77,25 @@
         await Html.RenderPartialAsync("Comments"); 
     }
 
-    @section Preload {
-        @* This lazy loads the stylesheet in a non-render blocking way *@
-        @if (settings.Value.DisplayComments)
-        {
-            <link rel="preload" href="~/css/comments.scss" as="style" />
-            <noscript><link rel="stylesheet" href="~/css/comments.scss" /></noscript>
-        }
-        @if (isCodePreview)
-        {
-            <link rel="preload" href="~/lib/prism/prism.scss" as="style" />
-            <script src="~/lib/prism/prism.js" async defer></script>
-        }
-    }
+	@section Preload {
+		@* This lazy loads the stylesheet in a non-render blocking way *@
+		@if (settings.Value.DisplayComments)
+		{
+			<link rel="preload" href="~/css/comments.scss" as="style" />
+			<noscript><link rel="stylesheet" href="~/css/comments.scss" /></noscript>
+		}
+		@if (isCodePreview)
+		{
+			<link rel="preload" href="~/lib/prism/prism.scss" as="style" />
+			<script src="~/lib/prism/prism.js" async defer></script>
+		}
+	}
 }
 
 @section Scripts {
 @if (User.Identity.IsAuthenticated)
 {
-        <script src="~/js/admin.js" async defer></script>
-        <link rel="stylesheet" href="~/css/admin.scss" />
-    }
+		<script src="~/js/admin.js" async defer></script>
+		<link rel="stylesheet" href="~/css/admin.scss" />
+	}
 }

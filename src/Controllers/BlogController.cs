@@ -54,7 +54,7 @@ namespace Miniblog.Core.Controllers
                 throw new ArgumentNullException(nameof(comment));
             }
 
-            comment.IsAdmin = this.User.Identity.IsAuthenticated;
+            comment.IsAdmin = this.User.Identity!.IsAuthenticated;
             comment.Content = comment.Content.Trim();
             comment.Author = comment.Author.Trim();
             comment.Email = comment.Email.Trim();
@@ -247,8 +247,8 @@ namespace Miniblog.Core.Controllers
 
                 existing.Slug = Models.Post.CreateSlug(post.Title + DateTime.UtcNow.ToString("yyyyMMddHHmm"));
             }
-            string categories = this.Request.Form[Constants.categories];
-            string tags = this.Request.Form[Constants.tags];
+            string categories = this.Request.Form[Constants.categories]!;
+            string tags = this.Request.Form[Constants.tags]!;
 
             existing.Categories.Clear();
             categories.Split(",", StringSplitOptions.RemoveEmptyEntries)
@@ -296,8 +296,8 @@ namespace Miniblog.Core.Controllers
                 var doc = new XmlDocument();
                 doc.LoadXml($"<root>{WebUtility.HtmlDecode(match.Value)}</root>");
 
-                var img = doc.FirstChild.FirstChild;
-                var srcNode = img.Attributes["src"];
+                var img = doc.FirstChild!.FirstChild;
+                var srcNode = img!.Attributes!["src"];
                 var fileNameNode = img.Attributes["data-filename"];
 
                 // The HTML editor creates base64 DataURIs which we'll have to convert to image
