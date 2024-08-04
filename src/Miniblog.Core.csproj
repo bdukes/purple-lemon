@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <ApplicationInsightsResourceId>/subscriptions/789648e5-888a-40cc-b490-b95f58f43503/resourcegroups/purplelemonphotography/providers/microsoft.insights/components/purplelemonphotography</ApplicationInsightsResourceId>
     <ApplicationInsightsAnnotationResourceId>/subscriptions/789648e5-888a-40cc-b490-b95f58f43503/resourcegroups/purplelemonphotography/providers/microsoft.insights/components/purplelemonphotography</ApplicationInsightsAnnotationResourceId>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
@@ -53,6 +53,7 @@
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
 
