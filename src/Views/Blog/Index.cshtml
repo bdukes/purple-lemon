@@ -3,8 +3,10 @@
 @{
     int currentPage = int.Parse(ViewContext.RouteData.Values[Constants.page] as string ?? "0");
 
-    int pageCount;
-    pageCount = int.TryParse(ViewData[Constants.TotalPostCount].ToString(), out pageCount) ? 0 : pageCount / 2;
+    int totalPosts;
+    totalPosts = int.TryParse(ViewData[Constants.TotalPostCount].ToString(), out totalPosts) ? totalPosts : 0;
+
+    int totalPages = (totalPosts / this.settings.Value.PostsPerPage) - (totalPosts % this.settings.Value.PostsPerPage == 0 ? 1 : 0);
 }
 
 <div class="main-content blog">
@@ -15,7 +17,7 @@
 
     <aside>
     <nav class="pagination container" aria-label="Pagination">
-        @if ((await Model.AnyAsync()) && currentPage < pageCount)
+        @if ((await Model.AnyAsync()) && currentPage < totalPages)
         {
             <a rel="prev" href="@ViewData[Constants.prev]" title="Older posts">&laquo; Older</a>
         }
@@ -30,7 +32,7 @@
 
         @section Head {
             <link rel="stylesheet" href="~/css/blog.scss" />
-            @if ((await Model.AnyAsync()) && currentPage < pageCount)
+            @if ((await Model.AnyAsync()) && currentPage < totalPages)
             {
                 <link rel="prev" href="@ViewData["prev"]" />
             }
