@@ -8,6 +8,7 @@ namespace Miniblog.Core.Controllers
     using Miniblog.Core.Services;
 
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Net;
@@ -36,11 +37,11 @@ namespace Miniblog.Core.Controllers
         [HttpPost]
         public async Task<IActionResult> AddComment(string postId, Comment comment)
         {
-            var post = await this.blog.GetPostById(postId).ConfigureAwait(false);
+            var post = await this.blog.GetPostById(postId).ConfigureAwait(true);
 
             if (!this.ModelState.IsValid)
             {
-                return this.View("Post", post);
+                return this.View(nameof(Post), post);
             }
 
             if (post is null || !post.AreCommentsOpen(this.settings.Value.CommentsCloseAfterDays))
@@ -83,11 +84,11 @@ namespace Miniblog.Core.Controllers
             // set the view option
             this.ViewData["ViewOption"] = this.settings.Value.ListView;
 
-            this.ViewData["TotalPostCount"] = await posts.CountAsync();
-            this.ViewData["Title"] = $"{this.manifest.Name} {category}";
-            this.ViewData["Description"] = $"Articles posted in the {category} category";
-            this.ViewData["prev"] = Url.Action("Index", new { category, page = page + 1, });
-            this.ViewData["next"] = Url.Action("Index", new { category, page = page <= 1 ? (int?)null : page - 1, });
+            this.ViewData[Constants.TotalPostCount] = await posts.CountAsync().ConfigureAwait(true);
+            this.ViewData[Constants.Title] = $"{this.manifest.Name} {category}";
+            this.ViewData[Constants.Description] = $"Articles posted in the {category} category";
+            this.ViewData[Constants.prev] = Url.Action("Index", new { category, page = page + 1, });
+            this.ViewData[Constants.next] = Url.Action("Index", new { category, page = page <= 1 ? (int?)null : page - 1, });
             return this.View("~/Views/Blog/Index.cshtml", filteredPosts.ToEnumerable());
         }
 
@@ -131,9 +132,11 @@ namespace Miniblog.Core.Controllers
 
         [Route("/blog/edit/{id?}")]
         [HttpGet, Authorize]
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(string? id)
         {
-            this.ViewData["AllCats"] = await this.blog.GetCategories().ToListAsync();
+            var categories = await this.blog.GetCategories().ToListAsync();
+            categories.Sort();
+            this.ViewData[Constants.AllCats] = categories;
 
             if (string.IsNullOrEmpty(id))
             {
@@ -157,15 +160,15 @@ namespace Miniblog.Core.Controllers
             var filteredPosts = posts.Skip(this.settings.Value.PostsPerPage * page).Take(this.settings.Value.PostsPerPage);
 
             // set the view option
-            this.ViewData["ViewOption"] = this.settings.Value.ListView;
+            this.ViewData[Constants.ViewOption] = this.settings.Value.ListView;
 
-            this.ViewData["TotalPostCount"] = await posts.CountAsync();
-            this.ViewData["Title"] = this.manifest.Name;
-            this.ViewData["Description"] = this.manifest.Description;
-            this.ViewData["prev"] = Url.Action("Index", new { page = page + 1 });
-            this.ViewData["next"] = Url.Action("Index", new { page = page <= 1 ? (int?)null : page - 1 });
+            this.ViewData[Constants.TotalPostCount] = await posts.CountAsync().ConfigureAwait(true);
+            this.ViewData[Constants.Title] = this.manifest.Name;
+            this.ViewData[Constants.Description] = this.manifest.Description;
+            this.ViewData[Constants.prev] = Url.Action("Index", new { page = page + 1 });
+            this.ViewData[Constants.next] = Url.Action("Index", new { page = page <= 1 ? (int?)null : page - 1 });
 
-            return this.View("~/Views/Blog/Index.cshtml", filteredPosts.ToEnumerable());
+            return this.View("~/Views/Blog/Index.cshtml", filteredPosts);
         }
 
         [Route("/blog/{slug?}")]
@@ -187,7 +190,7 @@ namespace Miniblog.Core.Controllers
                 this.ViewData["PageImageWidth"] = details.width;
             }
 
-            this.ViewData["RelatedPosts"] = await this.GetRelatedPosts(post);
+            this.ViewData["RelatedPosts"] = this.GetRelatedPosts(post);
             return this.View(post);
         }
 
@@ -203,7 +206,7 @@ namespace Miniblog.Core.Controllers
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View("Edit", post);
+                return this.View(nameof(Edit), post);
             }
 
             if (post is null)
@@ -212,7 +215,7 @@ namespace Miniblog.Core.Controllers
             }
 
             var existing = await this.blog.GetPostById(post.ID).ConfigureAwait(false) ?? post;
-            string categories = this.Request.Form["categories"];
+            string categories = this.Request.Form[Constants.categories];
 
             existing.Categories.Clear();
             categories.Split(",", StringSplitOptions.RemoveEmptyEntries)
@@ -245,8 +248,13 @@ namespace Miniblog.Core.Controllers
               ".webp"
             };
 
-            foreach (Match match in imgRegex.Matches(post.Content))
+            foreach (Match? match in imgRegex.Matches(post.Content))
             {
+                if (match is null)
+                {
+                    continue;
+                }
+
                 var doc = new XmlDocument();
                 doc.LoadXml($"<root>{WebUtility.HtmlDecode(match.Value)}</root>");
 
@@ -256,7 +264,7 @@ namespace Miniblog.Core.Controllers
 
                 // The HTML editor creates base64 DataURIs which we'll have to convert to image
                 // files on disk
-                if (srcNode == null || fileNameNode == null)
+                if (srcNode is null || fileNameNode is null)
                 {
                     continue;
                 }
@@ -315,24 +323,41 @@ namespace Miniblog.Core.Controllers
         }
 
         [NonAction]
-        private async Task<Post[]> GetRelatedPosts(Post post)
+        private async IAsyncEnumerable<Post> GetRelatedPosts(Post post, int postCount = 3)
         {
-            var categoryPosts = await Task.WhenAll(
-                post.Categories.Select(_blog.GetPostsByCategory)
-            );
-            var relatedPosts = categoryPosts
-                .SelectMany(c => c)
-                .Distinct()
-                .Where(p => p.ID != post.ID)
-                .Take(3)
-                .ToList();
-            if (relatedPosts.Count < 3)
+            var postIds = new HashSet<string>();
+            foreach (var category in post.Categories)
             {
-                var weddingPosts = await _blog.GetPostsByCategory("wedding");
-                relatedPosts.AddRange(weddingPosts.Take(3 - relatedPosts.Count));
+                await foreach (var relatedPost in this.blog.GetPostsByCategory(category))
+                {
+                    if (relatedPost.ID != post.ID && postIds.Add(relatedPost.ID))
+                    {
+                        yield return relatedPost;
+                    }
+
+                    if (postIds.Count >= postCount)
+                    {
+                        break;
+                    }
+                }
             }
 
-            return relatedPosts.ToArray();
+            if (postIds.Count < postCount)
+            {
+                var weddingPosts = this.blog.GetPostsByCategory("wedding");
+                await foreach (var weddingPost in weddingPosts)
+                {
+                    if (weddingPost.ID != post.ID && postIds.Add(weddingPost.ID))
+                    {
+                        yield return weddingPost;
+                    }
+
+                    if (postIds.Count >= postCount)
+                    {
+                        break;
+                    }
+                }
+            }
         }
     }
 }

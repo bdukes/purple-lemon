@@ -1,9 +1,9 @@
-﻿@model Post[]
+﻿@model IAsyncEnumerable<Post>?
 
-@if (Model != null && Model.Any())
+@if (Model != null && (await Model.AnyAsync()))
 {
     <aside class="related-posts">
-        @foreach (var post in Model)
+        @await foreach (var post in Model)
         {
             <a href="@post.GetLink()">
                 <figure>

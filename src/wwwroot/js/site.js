@@ -71,7 +71,6 @@
 
                     timer = null;
                 });
-
             }, delay);
         }
 

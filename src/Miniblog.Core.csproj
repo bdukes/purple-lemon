@@ -5,6 +5,9 @@
     <ApplicationInsightsResourceId>/subscriptions/789648e5-888a-40cc-b490-b95f58f43503/resourcegroups/purplelemonphotography/providers/microsoft.insights/components/purplelemonphotography</ApplicationInsightsResourceId>
     <ApplicationInsightsAnnotationResourceId>/subscriptions/789648e5-888a-40cc-b490-b95f58f43503/resourcegroups/purplelemonphotography/providers/microsoft.insights/components/purplelemonphotography</ApplicationInsightsAnnotationResourceId>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <Nullable>enable</Nullable>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -48,7 +51,7 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>

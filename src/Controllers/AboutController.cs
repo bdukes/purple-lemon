@@ -7,19 +7,19 @@ namespace Miniblog.Core.Controllers
 {
     public class AboutController : Controller
     {
-        private readonly IBlogService _blog;
+        private readonly IBlogService blog;
 
         public AboutController(IBlogService blog)
         {
-            _blog = blog;
+            this.blog = blog;
         }
 
         [Route("/about")]
         [OutputCache(Profile = "default")]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var posts = await _blog.GetPostsByCategory("purple lemon");
-            ViewData["RelatedPosts"] = posts.TakeLast(3).ToArray();
+            var posts = this.blog.GetPostsByCategory("purple lemon");
+            ViewData["RelatedPosts"] = posts.TakeLast(3);
             return View();
         }
     }
