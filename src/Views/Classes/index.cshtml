@@ -1,30 +1,34 @@
 @{
     ViewData["Title"] = "Photography Classes from Purple Lemon Photography";
-    ViewData["Description"] = $"Nikki Dukes is a certified professional phootgrapher in St. Louis";
+    ViewData["Description"] = $"Nikki Dukes is a certified professional photographer in St. Louis";
+}
+
+@section Head {
+	<link rel="stylesheet" href="~/css/classes.scss" />
 }
 
 <div class="main-content classes">
 
-    <img src="https://res.cloudinary.com/purple-lemon-photography/image/upload/f_auto,q_auto/vwnvf0bf6ifjkw8xjxfv" alt="Flyer describing fundamentals and experimental classes">
+	<img src="https://res.cloudinary.com/purple-lemon-photography/image/upload/f_auto,q_auto/vwnvf0bf6ifjkw8xjxfv" alt="Flyer describing fundamentals and experimental classes" />
 
-    <p>The class options are very flexible and customizable. Over the years, we've been able to take engaging, hands-on teaching strategies that have inspired and improved photographers of all ages, meeting their specific photography goals. From individual mentorships with loads of helpful feedback, to homeschool groups, individual and group classes in person, and indivduals or groups online. Many of the options include having shared spaces online to share photos and receive ongoing feedback and constructive criticism.  Past mentees and students have gone on to become highly successful in their craft and demonstrate tremendous growth.</p>
+    <p>The class options are very flexible and customizable. Over the years, we've been able to take engaging, hands-on teaching strategies that have inspired and improved photographers of all ages, meeting their specific photography goals. From individual mentorships with loads of helpful feedback, to homeschool groups, individual and group classes in person, and individuals or groups online. Many of the options include having shared spaces online to share photos and receive ongoing feedback and constructive criticism.  Past mentees and students have gone on to become highly successful in their craft and demonstrate tremendous growth.</p>
     <p>Photo Fundamentals classes focus on understanding how all cameras work, so the strategies you learn can apply to any and all cameras, and work for kids through adults. The depth of the content is adjusted for each set of learners.</p>
-    <p>Experimental Photography classes encourages photographers of any skill level to think creatively to create unique, one-of-a-kind photos in any situation by focusing on ideas like layers, textures, lighting, point of view, and movement. This type of class focuses on photographing in clever ways, rather than on digital manipulations or edits.</p>
+    <p>Experimental Photography classes encourage photographers of any skill level to think creatively to create unique, one-of-a-kind photos in any situation by focusing on ideas like layers, textures, lighting, point of view, and movement. This type of class focuses on photographing in clever ways, rather than on digital manipulations or edits.</p>
     <p>Email <a href="mailto:nikki@purplelemonphotography.com">nikki@purplelemonphotography.com</a> to find the best type of class for you or your group.</p>
-    <aside>
-        <ul>
-            <li>
-                Questions & Booking
-                <a class="action__primary" href="mailto:nikki@purplelemonphotography.com">
-                    <span>Email</span><span>Nikki</span>
-                </a>
-            </li>
-            <li>
-                About Us
-                <a class="action__primary" asp-controller="About" asp-action="Index">
-                    <span>Read</span><span>More</span>
-                </a>
-            </li>
-        </ul>
-    </aside>
+	<aside>
+		<ul>
+			<li>
+				Questions & Booking
+				<a class="action__primary" href="mailto:nikki@purplelemonphotography.com">
+					<span>Email</span><span>Nikki</span>
+				</a>
+			</li>
+			<li>
+				About Us
+				<a class="action__primary" asp-controller="About" asp-action="Index">
+					<span>Read</span><span>More</span>
+				</a>
+			</li>
+		</ul>
+	</aside>
 </div>

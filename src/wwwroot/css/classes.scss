@@ -1,0 +1,27 @@
+﻿@import "variables";
+
+.classes {
+    aside ul {
+        list-style: none;
+        padding-left: 0;
+        li {
+            padding-bottom: 2em;
+        }
+    }
+
+    @media (min-width: $width__large) {
+        aside {
+            grid-column-start: 1;
+            grid-column-end: -1;
+            ul {
+                display: flex;
+                justify-content: space-between;
+                padding: 0;
+            }
+            li {
+                display: block;
+                width: 45%;
+            }
+        }
+    }
+}
