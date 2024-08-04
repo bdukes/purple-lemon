@@ -34,6 +34,7 @@ namespace Miniblog.Core.Models
 
         public DateTime PubDate { get; set; } = DateTime.UtcNow;
 
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string Slug { get; set; } = string.Empty;
 
         [Required]
