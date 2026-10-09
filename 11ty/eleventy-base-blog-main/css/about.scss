@@ -1,0 +1,30 @@
+@import "variables";
+
+.video-wrap-im-sorry {
+    margin-bottom: 1em;
+}
+
+@media (min-width: $width__large) {
+    .family-picture {
+        float: right;
+        max-width: 50%;
+        padding: 2em 4em;
+    }
+
+    .logos {
+        display: flex;
+        align-items: center;
+        > * {
+            flex: 1;
+            padding: 2em;
+        }
+    }
+
+    .related-posts {
+        display: flex;
+        > * {
+            flex: 1;
+            margin: 0 1em;
+        }
+    }
+}

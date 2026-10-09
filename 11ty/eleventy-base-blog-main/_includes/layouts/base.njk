@@ -1,14 +1,23 @@
 <!doctype html>
 <html lang="{{ metadata.language }}">
-	<head>
+	<head prefix="og:http://ogp.me/ns#">
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>{{ title or metadata.title }}</title>
 		<meta name="description" content="{{ description or metadata.description }}">
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
 
-		{#- Uncomment this if you’d like folks to know that you used Eleventy to build your site!  #}
-		{#- <meta name="generator" content="{{ eleventy.generator }}"> #}
+		<meta name="generator" content="{{ eleventy.generator }}">
+
+        <link rel="preconnect" href="https://res.cloudinary.com" />
+        <link rel="dns-prefetch" href="//res.cloudinary.com/" />
+	    <link rel="preload" href="/css/belowthefold.css" as="style" />
+    	<noscript><link rel="stylesheet" href="/css/belowthefold.css" /></noscript>
+
+		{#- @RenderSection(Constants.Preload, required: false) #}
+
+		<style>{% include "css/abovethefold.scss" %}</style>
+		<style>{% getBundle "css" %}</style>
 
 		{#-
 		Plain-text bundles are provided via the `eleventy-plugin-bundle` plugin:
@@ -21,52 +30,103 @@
 		3. Learn more: https://github.com/11ty/eleventy-plugin-bundle
 		#}
 
-		{#- Add CSS to the bundle #}
-		<style>/* This is an arbitrary CSS string added to the bundle */</style>
-
-		{#- Add the contents of a file to the bundle #}
-		<style>{% include "css/index.css" %}</style>
-
-		{#- Or you can add from node_modules #}
-		{# <style>{% include "node_modules/something.css" %}</style> #}
-
-		{#- Render the CSS bundle using inlined CSS (for the fastest site performance in production) #}
-		<style>{% getBundle "css" %}</style>
-
-		{#- Renders the CSS bundle using a separate file, if you can't set CSP directive style-src: 'unsafe-inline' #}
-		{#- <link rel="stylesheet" href="{% getBundleFileUrl "css" %}"> #}
-
 		{#- Add the heading-anchors web component to the JavaScript bundle #}
 		<script type="module">{% include "node_modules/@zachleat/heading-anchors/heading-anchors.js" %}</script>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="{{ title or metadata.title }}" />
+    <meta property="og:description" content="{{ description or metadata.description }}" />
+    <meta property="og:url" content="{{ page.url }}" />
+
+	{#-
+    @if (!string.IsNullOrEmpty(ViewData["PageImageUrl"] as string)) {
+        <meta property="og:image" content="@ViewData["PageImageUrl"]" />
+        @if (!string.IsNullOrEmpty(ViewData["PageImageWidth"] as string)) {
+            <meta property="og:image:width" content="@ViewData["PageImageWidth"]" />
+        }
+        @if (!string.IsNullOrEmpty(ViewData["PageImageHeight"] as string)) {
+            <meta property="og:image:height" content="@ViewData["PageImageHeight"]" />
+        }
+    }
+	#}
+
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+		<link rel="manifest" href="/manifest.json" />
+		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#6f2c91" />
+		<meta name="msapplication-TileColor" content="#fbe219" />
+		<meta name="theme-color" content="#6f2c91" />
+
+		{#- @RenderSection(Constants.Head, required: false) #}
+
+		<meta name="application-name" content="{{ metdata.title }}" />
+		<meta name="msapplication-TileColor" content="#ffffff" />
+	
 	</head>
-	<body>
-		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
-
-		<header>
-			<a href="/" class="home-link">{{ metadata.title }}</a>
-
-			{#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
+	<body itemscope itemtype="http://schema.org/WebPage">
+		<header class="site-header">
 			<nav>
-				<h2 class="visually-hidden">Top level navigation menu</h2>
-				<ul class="nav">
-				{%- for entry in collections.all | eleventyNavigation %}
-					<li class="nav-item"><a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page"{% endif %}>{{ entry.title }}</a></li>
-				{%- endfor %}
+				<a class="logo" href="/"><img src="https://res.cloudinary.com/purple-lemon-photography/image/upload/f_auto,fl_keep_attribution.lossy,q_auto/v1/logo-618x139" width="618" height="139" alt="Purple Lemon Photography" /></a>
+
+				<div class="js-expandmore">Menu</div>
+				<ul class="js-to_expand">
+					<li class="@GetActiveClass("About")"><a href="/about">About</a></li>
+					<li class="@GetActiveClass("Gallery")">
+						<a href="/galleries/wedding">Galleries</a>
+						<div class="js-expandmore"></div>
+						<ul class="js-to_expand @GetIsOpenedClass("Gallery")">
+							<li class="@GetActiveClass("Gallery", "Wedding")"><a href="/galleries/wedding">Weddings</a></li>
+							<li class="@GetActiveClass("Gallery", "Family")"><a href="/galleries/family">Families</a></li>
+							<li class="@GetActiveClass("Gallery", "EngagementCouples")"><a href="/galleries/engagement-couples">Couples</a></li>
+							<li class="@GetActiveClass("Gallery", "Portraits")"><a  href="/galleries/portraits">Portraits</a></li>
+						</ul>
+					</li>
+					<li class="@GetActiveClass("Investment")"><a href="/investment">Investment</a></li>
+					<li class="@GetActiveClass("Blog")"><a href="/blog">Blog</a></li>
+					<li class="@GetActiveClass("Contact")"><a href="/contact">Contact</a></li>
+					<li><a href="https://www.etsy.com/shop/PurpleLemonPhoto">Fine Art</a></li>
+					<li class="@GetActiveClass("Classes")"><a href="classes">Classes</a></li>
 				</ul>
+
 			</nav>
 		</header>
 
-		<main id="main">
+		<main itemprop="mainEntity" itemscope itemtype="http://schema.org/Blog" role="main">
+			<noscript>
+            	<p class="container">Some features of this website do not work as expected when JavaScript is disabled</p>
+        	</noscript>
 			<heading-anchors>
 				{{ content | safe }}
 			</heading-anchors>
 		</main>
 
-		<footer>
-			<p>
-				<em>Built with <a href="https://www.11ty.dev/">{{ eleventy.generator }}</a></em>
-			</p>
+		<footer class="site-footer">
+			<small>Copyright {% year %} Purple Lemon Photography, LLC</small>
+			<nav>
+				<ul>
+					<li>
+						{#- from https://www.ppa.com/be-more/certification/cpp-only-section/cpp-logo-html-for-posting-on-web-sites #}
+						<a href="https://www.ppa.com/benefits/education/certification/why-hire-a-certified-professional-photographer" target="_blank">
+							<img src="https://res.cloudinary.com/purple-lemon-photography/image/upload/c_scale,f_auto,fl_lossy,q_auto,w_70/v1638915555/cpp-70x28.png" alt="Certified Professional Photographer" width="70" height="28" title="Certified Professional Photographer"/>
+						</a>
+					</li>
+				</ul>
+			</nav>
 		</footer>
+
+		{#- This lazy loads the stylesheet in a non-render blocking way #}
+		<link rel="preload" href="/css/belowthefold.css" as="style" />
+		<noscript><link rel="stylesheet" href="/css/belowthefold.css" /></noscript>
+
+		<script>{% include "js/van11y-accessible-hide-show-aria.min.js" %}</script>
+		<script>{% include "js/site.js" %}</script>
+		<script>
+		document.addEventListener("DOMContentLoaded", function onLoad() {
+			window.DOMContentLoaded = true;
+			document.removeEventListener("DOMContentLoaded", onLoad);
+		});
+		</script>
 
 		<!-- This page `{{ page.url }}` was built on {% currentBuildDate %} -->
 		<script type="module" src="{% getBundleFileUrl "js" %}"></script>

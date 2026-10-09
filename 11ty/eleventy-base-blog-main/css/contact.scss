@@ -1,0 +1,82 @@
+﻿@import "variables";
+
+.contact {
+    .general-info > * {
+        text-align: center;
+        padding: 0.5rem;
+        > * {
+            margin-right: 0.5rem;
+            + a {
+                border-left: 1px solid $cool-gray;
+                padding-left: 0.75rem;
+            }
+        }
+    }
+
+    address {
+        display: inline;
+        font-style: normal;
+    }
+
+    aside ul {
+        list-style: none;
+        padding-left: 0;
+        li {
+            padding-bottom: 2em;
+        }
+    }
+
+    h3 {
+        font-size: 1rem;
+        min-height: 3em;
+    }
+
+    .personal a {
+        display: inline-block;
+        margin-bottom: 0.75em;
+    }
+
+    @media (min-width: $width__large) {
+        .contact-people {
+            display: flex;
+
+            .personal {
+                flex: 1;
+                &:first-child {
+                    margin-right: 1em;
+                }
+            }
+        }
+
+        aside {
+            grid-column-start: 1;
+            grid-column-end: -1;
+            ul {
+                display: flex;
+                justify-content: space-between;
+                padding: 0;
+            }
+            li {
+                display: block;
+                width: 30%;
+            }
+        }
+
+        .general-info {
+            //display: flex;
+            align-items: center;
+            justify-items: stretch;
+
+            > * {
+                flex: 1 1 33%;
+                padding-left: 0.5rem;
+                margin: 0.5rem;
+                text-align: center;
+
+                &:first-child {
+                    padding-left: 0;
+                }
+            }
+        }
+    }
+}

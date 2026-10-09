@@ -1,0 +1,169 @@
+﻿@import "variables";
+
+// Lazy loading of images. See /js/site.js for more
+.notloaded {
+    opacity: 0;
+    transform: scale(.9);
+}
+
+.loaded {
+    background: none;
+    opacity: 1;
+    transform: scale(1);
+    transition: all 400ms ease-in;
+    // Don't animate when the reduced motion accessibility option
+    // has been enabled in the browser or OS. Safari is supporting this
+    @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+    }
+}
+
+a:focus,
+a:active,
+input:focus,
+button:focus,
+textarea:focus {
+    outline: 2px solid lighten($color__link, 20%);
+}
+
+noscript p {
+    background-color: crimson;
+    line-height: 2em;
+    padding: 0 10px;
+    color: white;
+    font-size: .9em;
+}
+
+aside {
+    $size__lemon: 50px;
+    $offset__lemon: 1rem;
+    background-image: url(https://res.cloudinary.com/purple-lemon-photography/image/upload/f_auto,fl_keep_attribution.lossy,q_auto/v1/logo-139x139);
+    background-repeat: no-repeat;
+    background-position: center $offset__lemon;
+    background-size: $size__lemon;
+
+    padding: calc(2rem + #{$offset__lemon} + #{$size__lemon}) 0 0.5rem;
+    margin: 2rem auto;
+    text-align: center;
+    border-top: 0.1rem solid $cool-gray;
+
+    text-transform: lowercase;
+
+    p {
+        padding: 0.5rem 0 0.5rem;
+    }
+    .action__primary {
+        font-family: $font-family__serif;
+        font-weight: bold;
+        font-size: 1.1em;
+        text-transform: none;
+
+        display: block;
+        padding: 1em;
+        margin: 1em auto 0;
+        border: 0.1em solid $cool-gray;
+
+        text-decoration: none;
+        color: $brand-purple;
+        span + span {
+            color: $brand-green;
+        }
+    }
+
+    @media (min-width: $width__large) {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        width: 80%;
+        .about & {
+            width: 100%;
+        }
+        p {
+            padding-left: 2.5rem;
+            padding-right: 2.5rem;
+        }
+        .action__primary {
+            max-width: 10em;
+        }
+    }
+}
+
+.nav__end {
+    border-top: double 4px $warm-gray;
+    margin-top: 1.5em;
+    padding-top: 0.75em;
+
+    li {
+        padding: 0.5em 0;
+        li {
+            padding: 0.75rem 0;
+        }
+    }
+
+    > .js-expandmore {
+        display: none;
+    }
+
+    > .expandmore__to_expand[data-hidden=true] {
+        display: block;
+    }
+}
+
+.video {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media print {
+    @page {
+        margin: 2cm;
+    }
+
+    body {
+        color: #000;
+        background: #fff;
+        font: 12pt/1.5 Calibri, serif;
+        -webkit-print-color-adjust: exact;
+    }
+
+    nav, aside, footer, #comments, [data-src], .video {
+        display: none;
+    }
+
+    article {
+        page-break-after: always;
+    }
+
+    h1, h2, h3, h4, h5, h6, img {
+        page-break-after: avoid;
+        page-break-inside: avoid
+    }
+
+    blockquote, table, pre {
+        page-break-inside: avoid;
+    }
+
+    ul, ol, dl {
+        page-break-before: avoid
+    }
+
+    .post pre {
+        background: none;
+        border: none;
+        box-shadow: none;
+        font-family: monospace;
+    }
+
+    a[href^="http"]:after, a[href^="//"]:after {
+        content: " <" attr(href) "> ";
+    }
+}

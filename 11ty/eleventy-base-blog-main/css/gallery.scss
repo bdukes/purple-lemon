@@ -1,0 +1,58 @@
+﻿@import "variables";
+
+.gallery {
+    h1 {
+        text-align: center;
+        margin-top: -0.5em;
+        margin-bottom: 1em;
+
+        color: lighten($color__text, 30%);
+        font-size: 0.8em;
+    }
+
+    aside ul {
+        list-style: none;
+        padding-left: 0;
+        li {
+            padding-bottom: 2em;
+        }
+    }
+
+    @media (min-width: $width__large) {
+        padding: 0;
+
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 0.5rem;
+        align-items: center;
+        @media (min-width: $width__xlarge) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .image__tall {
+            grid-row-end: span 2;
+        }
+        .image__panorama {
+            grid-column-end: span 3;
+        }
+        .image__tall.image__before-panorama, .image__tall.image__after-panorama {
+            grid-row-end: auto;
+        }
+
+        h1 { display: none; }
+
+        aside {
+            grid-column-start: 1;
+            grid-column-end: -1;
+            ul {
+                display: flex;
+                justify-content: space-between;
+                padding: 0;
+            }
+            li {
+                display: block;
+                width: 30%;
+            }
+        }
+    }
+}

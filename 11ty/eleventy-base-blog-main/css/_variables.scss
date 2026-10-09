@@ -1,0 +1,29 @@
+﻿$brand-purple: #6f2c91;
+$brand-yellow: #fbe219;
+$brand-green: #64bd4f;
+$warm-gray: #e6e2de;
+$cool-gray: #dad8d9;
+$cooler-gray: #989898;
+
+$color__heading: $brand-purple;
+$color__subheading: $cooler-gray;
+$color__link: $brand-purple;
+$color__text: #585858;
+$color__background: #fff;
+$color__background__outer: $warm-gray;
+
+$font-family__serif: Lora, Georgia, serif;
+$font-family__sans: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+
+$width__large: 700px;
+$width__xlarge: 920px;
+
+$line-height: 1.5;
+$height__footer: 3rem;
+$height__main: calc(98vh - (#{$height__footer} * #{$line-height}));
+
+// Comments
+$comments_bg_color: #f1f1f1;
+$comments_border-color: #dfdfdf;
+$comments_input_border-color: #bbb;
+$comments_highlight_color: #ffec82;

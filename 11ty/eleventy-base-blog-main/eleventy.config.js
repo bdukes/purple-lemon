@@ -1,8 +1,7 @@
 import { IdAttributePlugin, InputPathToUrlTransformPlugin, HtmlBasePlugin } from "@11ty/eleventy";
 import { feedPlugin } from "@11ty/eleventy-plugin-rss";
-import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
-import pluginNavigation from "@11ty/eleventy-navigation";
-import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
+import path from "node:path";
+import * as sass from "sass";
 
 import pluginFilters from "./_config/filters.js";
 
@@ -30,8 +29,38 @@ export default async function(eleventyConfig) {
 	// Run Eleventy when these files change:
 	// https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
 
+	eleventyConfig.addTemplateFormats("scss");
+	eleventyConfig.addExtension("scss", {
+		outputFileExtension: "css",
+
+		// opt-out of Eleventy Layouts
+		useLayouts: false,
+
+		compile: async function (inputContent, inputPath) {
+			const parsed = path.parse(inputPath);
+			// Don’t compile file names that start with an underscore
+			if (parsed.name.startsWith("_")) {
+				return;
+			}
+
+			const result = sass.compileString(inputContent, {
+				loadPaths: [
+					parsed.dir || ".",
+					this.config.dir.includes,
+				]
+			});
+
+			// Map dependencies for incremental builds
+			this.addDependencies(inputPath, result.loadedUrls);
+
+			return async (data) => {
+				return result.css;
+			};
+		},
+	});
+
 	// Watch CSS files
-	eleventyConfig.addWatchTarget("css/**/*.css");
+	eleventyConfig.addWatchTarget("css/**/*.{scss,css}");
 	// Watch images for the image pipeline.
 	eleventyConfig.addWatchTarget("content/**/*.{svg,webp,png,jpg,jpeg,gif}");
 
@@ -53,10 +82,6 @@ export default async function(eleventyConfig) {
 	});
 
 	// Official plugins
-	eleventyConfig.addPlugin(pluginSyntaxHighlight, {
-		preAttributes: { tabindex: 0 }
-	});
-	eleventyConfig.addPlugin(pluginNavigation);
 	eleventyConfig.addPlugin(HtmlBasePlugin);
 	eleventyConfig.addPlugin(InputPathToUrlTransformPlugin);
 
@@ -85,27 +110,6 @@ export default async function(eleventyConfig) {
 		}
 	});
 
-	// Image optimization: https://www.11ty.dev/docs/plugins/image/#eleventy-transform
-	eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
-		// Output formats for each image.
-		formats: ["avif", "webp", "auto"],
-
-		// widths: ["auto"],
-
-		failOnError: false,
-		htmlOptions: {
-			imgAttributes: {
-				// e.g. <img loading decoding> assigned on the HTML tag will override these values.
-				loading: "lazy",
-				decoding: "async",
-			}
-		},
-
-		sharpOptions: {
-			animated: true,
-		},
-	});
-
 	// Filters
 	eleventyConfig.addPlugin(pluginFilters);
 
@@ -117,6 +121,10 @@ export default async function(eleventyConfig) {
 
 	eleventyConfig.addShortcode("currentBuildDate", () => {
 		return (new Date()).toISOString();
+	});
+
+	eleventyConfig.addShortcode("year", () => {
+		return (new Date()).getFullYear();
 	});
 
 	// Features to make your build faster (when you need them)
