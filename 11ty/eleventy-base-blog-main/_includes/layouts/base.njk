@@ -9,14 +9,14 @@
 
 		<meta name="generator" content="{{ eleventy.generator }}">
 
-        <link rel="preconnect" href="https://res.cloudinary.com" />
-        <link rel="dns-prefetch" href="//res.cloudinary.com/" />
-	    <link rel="preload" href="/css/belowthefold.css" as="style" />
-    	<noscript><link rel="stylesheet" href="/css/belowthefold.css" /></noscript>
+		<link rel="preconnect" href="https://res.cloudinary.com" />
+		<link rel="dns-prefetch" href="//res.cloudinary.com/" />
+		<link rel="preload" href="/css/belowthefold.css" as="style" />
+		<noscript><link rel="stylesheet" href="/css/belowthefold.css" /></noscript>
 
 		{#- @RenderSection(Constants.Preload, required: false) #}
 
-		<style>{% include "css/abovethefold.scss" %}</style>
+		<style>{% include "css/abovethefold.css" %}</style>
 		<style>{% getBundle "css" %}</style>
 
 		{#-
@@ -62,7 +62,7 @@
 
 		<meta name="application-name" content="{{ metdata.title }}" />
 		<meta name="msapplication-TileColor" content="#ffffff" />
-	
+
 	</head>
 	<body itemscope itemtype="http://schema.org/WebPage">
 		<header class="site-header">

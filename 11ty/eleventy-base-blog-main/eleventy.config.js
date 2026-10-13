@@ -1,19 +1,21 @@
-import { IdAttributePlugin, InputPathToUrlTransformPlugin, HtmlBasePlugin } from "@11ty/eleventy";
+import {
+	IdAttributePlugin,
+	InputPathToUrlTransformPlugin,
+	HtmlBasePlugin,
+} from "@11ty/eleventy";
 import { feedPlugin } from "@11ty/eleventy-plugin-rss";
-import path from "node:path";
-import * as sass from "sass";
 
 import pluginFilters from "./_config/filters.js";
 
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
-export default async function(eleventyConfig) {
+export default async function (eleventyConfig) {
 	// Drafts, see also _data/eleventyDataSchema.js
 	eleventyConfig.addPreprocessor("drafts", "*", (data, content) => {
 		if (data.draft) {
 			data.title = `${data.title} (draft)`;
 		}
 
-		if(data.draft && process.env.ELEVENTY_RUN_MODE === "build") {
+		if (data.draft && process.env.ELEVENTY_RUN_MODE === "build") {
 			return false;
 		}
 	});
@@ -22,47 +24,15 @@ export default async function(eleventyConfig) {
 	// For example, `./public/css/` ends up in `_site/css/`
 	eleventyConfig
 		.addPassthroughCopy({
-			"./public/": "/"
+			"./public/": "/",
 		})
 		.addPassthroughCopy("./content/feed/pretty-atom-feed.xsl");
 
 	// Run Eleventy when these files change:
 	// https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
 
-	eleventyConfig.addTemplateFormats("scss");
-	eleventyConfig.addExtension("scss", {
-		outputFileExtension: "css",
-
-		// opt-out of Eleventy Layouts
-		useLayouts: false,
-
-		compile: async function (inputContent, inputPath) {
-			const parsed = path.parse(inputPath);
-			// Don’t compile file names that start with an underscore
-			if (parsed.name.startsWith("_")) {
-				return;
-			}
-
-			const result = sass.compileString(inputContent, {
-				loadPaths: [
-					parsed.dir || ".",
-					this.config.dir.includes,
-				]
-			});
-
-			// Map dependencies for incremental builds
-			this.addDependencies(inputPath, result.loadedUrls);
-
-			return async (data) => {
-				return result.css;
-			};
-		},
-	});
-
 	// Watch CSS files
-	eleventyConfig.addWatchTarget("css/**/*.{scss,css}");
-	// Watch images for the image pipeline.
-	eleventyConfig.addWatchTarget("content/**/*.{svg,webp,png,jpg,jpeg,gif}");
+	eleventyConfig.addWatchTarget("css/**/*.css");
 
 	// Per-page bundles, see https://github.com/11ty/eleventy-plugin-bundle
 	// Bundle <style> content and adds a {% css %} paired shortcode
@@ -92,8 +62,8 @@ export default async function(eleventyConfig) {
 		templateData: {
 			eleventyNavigation: {
 				key: "Feed",
-				order: 4
-			}
+				order: 4,
+			},
 		},
 		collection: {
 			name: "posts",
@@ -105,9 +75,9 @@ export default async function(eleventyConfig) {
 			subtitle: "Nikki Dukes is a St. Louis wedding and portrait photographer",
 			base: "https://purplelemonphotography.com/",
 			author: {
-				name: "Nikki Dukes"
-			}
-		}
+				name: "Nikki Dukes",
+			},
+		},
 	});
 
 	// Filters
@@ -120,11 +90,11 @@ export default async function(eleventyConfig) {
 	});
 
 	eleventyConfig.addShortcode("currentBuildDate", () => {
-		return (new Date()).toISOString();
+		return new Date().toISOString();
 	});
 
 	eleventyConfig.addShortcode("year", () => {
-		return (new Date()).getFullYear();
+		return new Date().getFullYear();
 	});
 
 	// Features to make your build faster (when you need them)
@@ -134,18 +104,13 @@ export default async function(eleventyConfig) {
 	// https://www.11ty.dev/docs/copy/#emulate-passthrough-copy-during-serve
 
 	// eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
-};
+	eleventyConfig.setUseGitIgnore(false);
+}
 
 export const config = {
 	// Control which files Eleventy will process
 	// e.g.: *.md, *.njk, *.html, *.liquid
-	templateFormats: [
-		"md",
-		"njk",
-		"html",
-		"liquid",
-		"11ty.js",
-	],
+	templateFormats: ["md", "njk", "html", "liquid", "11ty.js"],
 
 	// Pre-process *.md files with: (default: `liquid`)
 	markdownTemplateEngine: "njk",
@@ -155,10 +120,10 @@ export const config = {
 
 	// These are all optional:
 	dir: {
-		input: "content",          // default: "."
-		includes: "../_includes",  // default: "_includes" (`input` relative)
-		data: "../_data",          // default: "_data" (`input` relative)
-		output: "_site"
+		input: "content", // default: "."
+		includes: "../_includes", // default: "_includes" (`input` relative)
+		data: "../_data", // default: "_data" (`input` relative)
+		output: "_site",
 	},
 
 	// -----------------------------------------------------------------
