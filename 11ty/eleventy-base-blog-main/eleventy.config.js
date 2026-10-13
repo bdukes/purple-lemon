@@ -97,12 +97,12 @@ export default async function (eleventyConfig) {
 		return new Date().getFullYear();
 	});
 
-	eleventyConfig.addShortcode("getActiveClass", function (url) {
-		return this.page.url === url ? "active" : "";
+	eleventyConfig.addFilter("isActive", function (value, url) {
+		return this.page.url === url ? value : "";
 	});
 
-	eleventyConfig.addShortcode("getIsOpenedClass", function (url) {
-		return this.page.url.startsWith(url) ? "is-opened" : "";
+	eleventyConfig.addFilter("isOpened", function (value, url) {
+		return this.page.url.startsWith(url) ? value : "";
 	});
 
 	// Features to make your build faster (when you need them)
