@@ -1,20 +1,20 @@
 
 <div class="js-expandmore">Menu</div>
 <ul class="js-to_expand">
-	<li class="@GetActiveClass("About")"><a href="/about">About</a></li>
-	<li class="@GetActiveClass("Gallery")">
-		<a href="/galleries/wedding">Galleries</a>
+	<li class="{% getActiveClass "/about/" %}"><a href="/about">About</a></li>
+	<li class="{% getActiveClass "/gallery/" %}">
+		<a href="/galleries/wedding/">Galleries</a>
 		<div class="js-expandmore"></div>
-		<ul class="js-to_expand @GetIsOpenedClass("Gallery")">
-			<li class="@GetActiveClass("Gallery", "Wedding")"><a href="/galleries/wedding">Weddings</a></li>
-			<li class="@GetActiveClass("Gallery", "Family")"><a href="/galleries/family">Families</a></li>
-			<li class="@GetActiveClass("Gallery", "EngagementCouples")"><a href="/galleries/engagement-couples">Couples</a></li>
-			<li class="@GetActiveClass("Gallery", "Portraits")"><a  href="/galleries/portraits">Portraits</a></li>
+		<ul class="js-to_expand {% getIsOpenedClass "/galleries/" %}">
+			<li class="{% getActiveClass "/galleries/wedding/" %}><a href="/galleries/wedding">Weddings</a></li>
+			<li class="{% getActiveClass "/galleries/family/" %}"><a href="/galleries/family">Families</a></li>
+			<li class="{% getActiveClass "/galleries/engagement-couples/" %}"><a href="/galleries/engagement-couples">Couples</a></li>
+			<li class="{% getActiveClass "/galleries/portraits/" %}"><a  href="/galleries/portraits">Portraits</a></li>
 		</ul>
 	</li>
-	<li class="@GetActiveClass("Investment")"><a href="/investment">Investment</a></li>
-	<li class="@GetActiveClass("Blog")"><a href="/blog">Blog</a></li>
-	<li class="@GetActiveClass("Contact")"><a href="/contact">Contact</a></li>
+	<li class="{% getActiveClass "/investment" %}"><a href="/investment/">Investment</a></li>
+	<li class="{% getActiveClass "/blog" %}"><a href="/blog/">Blog</a></li>
+	<li class="{% getActiveClass "/contact" %}"><a href="/contact/">Contact</a></li>
 	<li><a href="https://www.etsy.com/shop/PurpleLemonPhoto">Fine Art</a></li>
-	<li class="@GetActiveClass("Classes")"><a href="classes">Classes</a></li>
+	<li class="{% getActiveClass "/classes" %}"><a href="/classes/">Classes</a></li>
 </ul>

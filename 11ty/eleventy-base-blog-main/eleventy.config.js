@@ -97,6 +97,14 @@ export default async function (eleventyConfig) {
 		return new Date().getFullYear();
 	});
 
+	eleventyConfig.addShortcode("getActiveClass", function (url) {
+		return this.page.url === url ? "active" : "";
+	});
+
+	eleventyConfig.addShortcode("getIsOpenedClass", function (url) {
+		return this.page.url.startsWith(url) ? "is-opened" : "";
+	});
+
 	// Features to make your build faster (when you need them)
 
 	// If your passthrough copy gets heavy and cumbersome, add this line
