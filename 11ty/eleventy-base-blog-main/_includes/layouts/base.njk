@@ -11,9 +11,10 @@
 
 		<link rel="preconnect" href="https://res.cloudinary.com" />
 		<link rel="dns-prefetch" href="//res.cloudinary.com/" />
+		{#-
 		<link rel="preload" href="/css/belowthefold.css" as="style" />
 		<noscript><link rel="stylesheet" href="/css/belowthefold.css" /></noscript>
-
+    #}
 		{#- @RenderSection(Constants.Preload, required: false) #}
 
 		<style>{% include "css/abovethefold.css" %}</style>
@@ -68,26 +69,7 @@
 		<header class="site-header">
 			<nav>
 				<a class="logo" href="/"><img src="https://res.cloudinary.com/purple-lemon-photography/image/upload/f_auto,fl_keep_attribution.lossy,q_auto/v1/logo-618x139" width="618" height="139" alt="Purple Lemon Photography" /></a>
-
-				<div class="js-expandmore">Menu</div>
-				<ul class="js-to_expand">
-					<li class="@GetActiveClass("About")"><a href="/about">About</a></li>
-					<li class="@GetActiveClass("Gallery")">
-						<a href="/galleries/wedding">Galleries</a>
-						<div class="js-expandmore"></div>
-						<ul class="js-to_expand @GetIsOpenedClass("Gallery")">
-							<li class="@GetActiveClass("Gallery", "Wedding")"><a href="/galleries/wedding">Weddings</a></li>
-							<li class="@GetActiveClass("Gallery", "Family")"><a href="/galleries/family">Families</a></li>
-							<li class="@GetActiveClass("Gallery", "EngagementCouples")"><a href="/galleries/engagement-couples">Couples</a></li>
-							<li class="@GetActiveClass("Gallery", "Portraits")"><a  href="/galleries/portraits">Portraits</a></li>
-						</ul>
-					</li>
-					<li class="@GetActiveClass("Investment")"><a href="/investment">Investment</a></li>
-					<li class="@GetActiveClass("Blog")"><a href="/blog">Blog</a></li>
-					<li class="@GetActiveClass("Contact")"><a href="/contact">Contact</a></li>
-					<li><a href="https://www.etsy.com/shop/PurpleLemonPhoto">Fine Art</a></li>
-					<li class="@GetActiveClass("Classes")"><a href="classes">Classes</a></li>
-				</ul>
+				{% include "menu.njk" %}
 
 			</nav>
 		</header>
@@ -115,9 +97,11 @@
 			</nav>
 		</footer>
 
-		{#- This lazy loads the stylesheet in a non-render blocking way #}
+		{#- This lazy loads the stylesheet in a non-render blocking way
 		<link rel="preload" href="/css/belowthefold.css" as="style" />
 		<noscript><link rel="stylesheet" href="/css/belowthefold.css" /></noscript>
+		#}
+		<style>{% include "css/belowthefold.css" %}</style>
 
 		<script>{% include "js/van11y-accessible-hide-show-aria.min.js" %}</script>
 		<script>{% include "js/site.js" %}</script>
