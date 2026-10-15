@@ -31,9 +31,6 @@
 		3. Learn more: https://github.com/11ty/eleventy-plugin-bundle
 		#}
 
-		{#- Add the heading-anchors web component to the JavaScript bundle #}
-		<script type="module">{% include "node_modules/@zachleat/heading-anchors/heading-anchors.js" %}</script>
-
     <meta property="og:type" content="article" />
     <meta property="og:title" content="{{ title or metadata.title }}" />
     <meta property="og:description" content="{{ description or metadata.description }}" />
@@ -78,9 +75,7 @@
 			<noscript>
             	<p class="container">Some features of this website do not work as expected when JavaScript is disabled</p>
         	</noscript>
-			<heading-anchors>
-				{{ content | safe }}
-			</heading-anchors>
+			{{ content | safe }}
 		</main>
 
 		<footer class="site-footer">
