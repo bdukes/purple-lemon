@@ -28,9 +28,8 @@ const description = "Nikki Dukes is a St. Louis wedding photographer";
         <a href="https://www.ppa.com/benefits/certification/cpp-liaisons/cpp-liaison-faqs" title="Certified Professional Photographer, certification liason"><img src="https://res.cloudinary.com/purple-lemon-photography/image/upload/f_auto,fl_lossy,q_auto/v1616762451/2021-cpp-liaison.png" alt="Certified Professional Photographer, 2021 Certification Liason logo" /></a>
     </nav>
 
-@{
-    await Html.RenderPartialAsync("_RelatedPosts", ViewData["RelatedPosts"]);
-}
+		{% set postslist = collections['purple lemon'] %}
+		{% include "related-posts.njk" %}
 
     <nav class="nav__end">
         {% include "menu.njk" %}
