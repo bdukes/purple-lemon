@@ -1,16 +1,18 @@
 import { z } from "zod";
 
-// Draft content, validate `draft` front matter
-export default function() {
-	return function(data) {
+// Draft content, validate `isPublished` front matter
+export default function () {
+	return function (data) {
 		// Note that drafts may be skipped in a preprocessor (see eleventy.config.js)
 		// when doing a standard build (not --serve or --watch)
-		let result = z.object({
-			draft: z.optional(z.boolean())
-		}).safeParse(data);
+		let result = z
+			.object({
+				isPublished: z.optional(z.boolean()),
+			})
+			.safeParse(data);
 
-		if(result.error) {
+		if (result.error) {
 			throw new Error(z.prettifyError(result.error));
 		}
-	}
+	};
 }
