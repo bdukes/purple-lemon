@@ -86,7 +86,7 @@ export default function (eleventyConfig) {
 				const src = img
 					.getAttribute("src")
 					.replace(
-						/\/[^/]*f_auto[^/]*\//,
+						/(\/[^/]*f_auto[^/]*\/)/,
 						`$1,c_fill,w_${preferredWidth},h_${preferredHeight}/`,
 					);
 				img.setAttribute("src", src);

@@ -2,7 +2,7 @@
 {%- for post in postslist | reverse %}
 		<a href="{{ post.url }}">
 			<figure>
-				{{ post | findPrimaryImageTag(360, 240) }}
+				{{ post | findPrimaryImageTag(360, 240) | safe }}
 				<figcaption>
 					{% if post.data.title %}
 						{{ post.data.title }}
