@@ -1,0 +1,16 @@
+<aside class="related-posts">
+{%- for post in postslist | reverse %}
+		<a href="{{ post.url }}">
+			<figure>
+				{{ post | findPrimaryImageTag(360, 240) }}
+				<figcaption>
+					{% if post.data.title %}
+						{{ post.data.title }}
+					{% else %}
+						<code>{{ post.url }}</code>
+					{% endif %}
+				</figcaption>
+			</figure>
+		</a>
+{%- endfor %}
+</aside>
