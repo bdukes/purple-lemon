@@ -1,25 +1,30 @@
 ---
 layout: layouts/base.njk
 ---
-<h1>{{ title }}</h1>
+{#- <link rel="canonical" href="@(host + Model.GetLink())" /> #}
+<style>{% include "css/blog.css" %}</style>
 
-<ul class="post-metadata">
-	<li><time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time></li>
-	{%- for tag in tags | filterTagList %}
-	{%- set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
-	<li><a href="{{ tagUrl }}" class="post-tag">{{ tag }}</a>{%- if not loop.last %}, {% endif %}</li>
-	{%- endfor %}
-</ul>
+<article class="post container main-container" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+	<header>
+		<h1 itemprop="name headline"><a href="{{ page.url }}" rel="canonical" itemprop="url">{{ title }}</a></h1>
+		<time datetime="{{ pubDate | htmlDateString }}" itemprop="datePublished">Published {{ pubDate | log | readableDate }}</time>
+	</header>
+	<div itemprop="articleBody mainEntityOfPage" cdnify>
+		{{ content | safe }}
+	</div>
+	<footer>
+		<ul class="categories">
+			{%- for tag in tags | filterTagList %}
+				{%- set tagUrl %}/blog/category/{{ tag | slugify }}/{% endset %}
+				<li itemprop="articleSection"><a href="{{ tagUrl }}">{{ tag }}</a></li>
+			{%- endfor %}
+		</ul>
 
-{{ content | safe }}
+		<meta itemprop="author" content="{{ owner }}" />
+		<meta itemprop="dateModified" content="{{ lastModified | htmlDateString }}" />
+		<meta itemprop="mainEntityOfPage" content="{{ page.url }}" />
+	</footer>
+</article>
 
-{%- if collections.posts %}
-{%- set previousPost = collections.posts | getPreviousCollectionItem %}
-{%- set nextPost = collections.posts | getNextCollectionItem %}
-{%- if nextPost or previousPost %}
-<ul class="links-nextprev">
-	{%- if previousPost %}<li class="links-nextprev-prev">← Previous<br> <a href="{{ previousPost.url }}">{{ previousPost.data.title }}</a></li>{% endif %}
-	{%- if nextPost %}<li class="links-nextprev-next">Next →<br><a href="{{ nextPost.url }}">{{ nextPost.data.title }}</a></li>{% endif %}
-</ul>
-{%- endif %}
-{%- endif %}
+{% set postslist = getRelatedPosts(collections, tags, page.filePathStem) %}
+{% include "related-posts.njk" %}

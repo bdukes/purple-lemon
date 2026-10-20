@@ -6,6 +6,7 @@ import {
 import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 
 import pluginFilters from "./_config/filters.js";
+import { getRelatedPosts } from "./_config/functions.js";
 
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export default async function (eleventyConfig) {
@@ -96,6 +97,8 @@ export default async function (eleventyConfig) {
 	eleventyConfig.addShortcode("year", () => {
 		return new Date().getFullYear();
 	});
+
+	eleventyConfig.addNunjucksGlobal("getRelatedPosts", getRelatedPosts);
 
 	// Features to make your build faster (when you need them)
 

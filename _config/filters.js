@@ -2,16 +2,16 @@ import { DateTime } from "luxon";
 import { DOMParser } from "@xmldom/xmldom";
 
 export default function (eleventyConfig) {
-	eleventyConfig.addFilter("readableDate", (dateObj, format, zone) => {
+	eleventyConfig.addFilter("readableDate", (isoDate, format, zone) => {
 		// Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
-		return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(
-			format || "dd LLLL yyyy",
+		return DateTime.fromISO(isoDate, { zone: zone || "utc" }).toFormat(
+			format || "LLL dd, yyyy",
 		);
 	});
 
-	eleventyConfig.addFilter("htmlDateString", (dateObj) => {
+	eleventyConfig.addFilter("htmlDateString", (isoDate) => {
 		// dateObj input: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
-		return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("yyyy-LL-dd");
+		return DateTime.fromISO(isoDate, { zone: "utc" }).toFormat("yyyy-LL-dd");
 	});
 
 	// Get the first `n` elements of a collection.
