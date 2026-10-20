@@ -4,10 +4,10 @@
 	"description": "A starter repository for a blog web site using the Eleventy site generator.",
 	"type": "module",
 	"scripts": {
-		"build": "concurrently \"npm run build-11ty\" \"npm run build-sass\"",
+		"build": "concurrently --kill-others-on-fail \"npm run build-11ty\" \"npm run build-sass\"",
 		"build-11ty": "npx @11ty/eleventy",
 		"build-sass": "sass ./css/",
-		"start": "concurrently \"npm run start-11ty\" \"npm run start-sass\"",
+		"start": "concurrently --kill-others-on-fail \"npm run start-11ty\" \"npm run start-sass\"",
 		"start-11ty": "npm run build-11ty -- --serve --quiet",
 		"start-sass": "npm run build-sass -- --watch",
 		"debug": "cross-env DEBUG=Eleventy* npx @11ty/eleventy",
