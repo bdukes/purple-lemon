@@ -4,11 +4,7 @@
 			<figure>
 				{{ post | findPrimaryImageTag(360, 240) | safe }}
 				<figcaption>
-					{% if post.data.title %}
-						{{ post.data.title }}
-					{% else %}
-						<code>{{ post.url }}</code>
-					{% endif %}
+					{{ post.data.title }}
 				</figcaption>
 			</figure>
 		</a>
