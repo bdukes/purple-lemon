@@ -53,7 +53,7 @@ export default function (eleventyConfig) {
 	});
 
 	function findPrimaryImageNode(post) {
-		const matches = post.content.matchAll(/<img [^>]+\/>/gi);
+		const matches = post.rawInput.matchAll(/<img [^>]+\/>/gi);
 		const images = [];
 		for (const match of matches) {
 			const img = new DOMParser().parseFromString(
