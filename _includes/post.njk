@@ -1,0 +1,21 @@
+<article class="post container post__excerpt" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+	<header>
+		<h1 itemprop="name headline"><a href="{{ post.page.url }}" rel="canonical" itemprop="url">{{ post.data.title }}</a></h1>
+		<time datetime="{{ post.data.pubDate | htmlDateString }}" itemprop="datePublished">Published {{ post.data.pubDate | log | readableDate }}</time>
+	</header>
+	<div itemprop="articleBody mainEntityOfPage" cdnify>
+		{{ post.content | safe }}
+	</div>
+	<footer>
+		<ul class="categories">
+			{%- for tag in post.data.tags | filterTagList %}
+				{%- set tagUrl %}/blog/category/{{ tag | slugify }}/{% endset %}
+				<li itemprop="articleSection"><a href="{{ tagUrl }}">{{ tag }}</a></li>
+			{%- endfor %}
+		</ul>
+
+		<meta itemprop="author" content="{{ post.data.owner }}" />
+		<meta itemprop="dateModified" content="{{ post.data.lastModified | htmlDateString }}" />
+		<meta itemprop="mainEntityOfPage" content="{{ post.page.url }}" />
+	</footer>
+</article>

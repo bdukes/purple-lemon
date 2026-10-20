@@ -11,17 +11,19 @@ const pagination = {
 const eleventyExcludeFromCollections = true;
 
 const eleventyComputed = {
-	title: "Tagged '{{ tag }}'",
+	title: "Purple Lemon Photography {{ tag }}",
 	permalink: function(data) {
 		// If DuplicatePermalinkOutputError occurs, check that no tag occurs
 		// with differing case, e.g. "RSS" and "rss".
-		return `/tags/${this.slugify(data.tag)}/`;
+		return `/blog/category/${this.slugify(data.tag)}/`;
 	}
 };
 ---
-<h1>Tagged “{{ tag }}”</h1>
 
-{% set postslist = collections[ tag ] %}
-{% include "postslist.njk" %}
+<style>{% include "css/blog.css" %}</style>
 
-<p>See <a href="tags.njk">all tags</a>.</p>
+<div class="main-content blog">
+{%- for post in collections[tag] %}
+	{% include "post.njk" %}
+{%- endfor %}
+</div>

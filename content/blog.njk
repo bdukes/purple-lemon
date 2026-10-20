@@ -1,10 +1,15 @@
 ---js
+const title = "Purple Lemon Photography blog";
+const description = "Nikki Dukes is a St. Louis wedding and portrait photographer";
 const eleventyNavigation = {
 	key: "Archive",
 	order: 2
 };
 ---
-<h1>Archive</h1>
+<style>{% include "css/blog.css" %}</style>
 
-{% set postslist = collections.posts %}
-{% include "postslist.njk" %}
+<div class="main-content blog">
+{%- for post in collections.posts %}
+	{% include "post.njk" %}
+{%- endfor %}
+</div>
