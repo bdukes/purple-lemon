@@ -10,7 +10,7 @@ layout: layouts/base.njk
 		<time datetime="{{ pubDate | htmlDateString }}" itemprop="datePublished">Published {{ pubDate | readableDate }}</time>
 	</header>
 	<div itemprop="articleBody mainEntityOfPage" cdnify>
-		{{ content | safe }}
+		{{ content | processYouTubeTags | safe }}
 	</div>
 	<footer>
 		<ul class="categories">

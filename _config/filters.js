@@ -52,6 +52,13 @@ export default function (eleventyConfig) {
 		return this.page.url.startsWith(url) ? value : "";
 	});
 
+	eleventyConfig.addFilter("processYouTubeTags", function (value) {
+		return value.replaceAll(
+			/\[youtube:(.*?)\]/g,
+			`<div class="video"><iframe width="560" height="315" title="YouTube embed" src="about:blank" data-src="https://www.youtube-nocookie.com/embed/$1?modestbranding=1&amp;hd=1&amp;rel=0&amp;theme=light" allowfullscreen></iframe></div>`,
+		);
+	});
+
 	function findPrimaryImageNode(post) {
 		const matches = post.rawInput.matchAll(/<img [^>]+\/>/gi);
 		const images = [];
