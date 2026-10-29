@@ -7,7 +7,7 @@ layout: layouts/base.njk
 <article class="post container main-content post__full" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
 	<header>
 		<h1 itemprop="name headline"><a href="{{ page.url }}" rel="canonical" itemprop="url">{{ title }}</a></h1>
-		<time datetime="{{ pubDate | htmlDateString }}" itemprop="datePublished">Published {{ pubDate | log | readableDate }}</time>
+		<time datetime="{{ pubDate | htmlDateString }}" itemprop="datePublished">Published {{ pubDate | readableDate }}</time>
 	</header>
 	<div itemprop="articleBody mainEntityOfPage" cdnify>
 		{{ content | safe }}

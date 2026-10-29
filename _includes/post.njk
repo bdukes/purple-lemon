@@ -1,7 +1,7 @@
 <article class="post container post__excerpt" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
 	<header>
 		<h1 itemprop="name headline"><a href="{{ post.page.url }}" rel="canonical" itemprop="url">{{ post.data.title }}</a></h1>
-		<time datetime="{{ post.data.pubDate | htmlDateString }}" itemprop="datePublished">Published {{ post.data.pubDate | log | readableDate }}</time>
+		<time datetime="{{ post.data.pubDate | htmlDateString }}" itemprop="datePublished">Published {{ post.data.pubDate | readableDate }}</time>
 	</header>
 	<div itemprop="articleBody mainEntityOfPage" cdnify>
 		{{ post.content | safe }}
