@@ -52,6 +52,13 @@ export default function (eleventyConfig) {
 		return this.page.url.startsWith(url) ? value : "";
 	});
 
+	eleventyConfig.addFilter("lazyLoadImages", function (value) {
+		return value.replaceAll(
+			/(<img.*?)(src=["'])(?<src>.*?)(["'].*?[/]?>)/g,
+			`$1 src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="$3$4`,
+		);
+	});
+
 	eleventyConfig.addFilter("processYouTubeTags", function (value) {
 		return value.replaceAll(
 			/\[youtube:(.*?)\]/g,
