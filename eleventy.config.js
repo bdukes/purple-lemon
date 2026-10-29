@@ -1,8 +1,3 @@
-import {
-	IdAttributePlugin,
-	InputPathToUrlTransformPlugin,
-	HtmlBasePlugin,
-} from "@11ty/eleventy";
 import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 
 import pluginFilters from "./_config/filters.js";
@@ -53,9 +48,6 @@ export default async function (eleventyConfig) {
 	});
 
 	// Official plugins
-	eleventyConfig.addPlugin(HtmlBasePlugin);
-	eleventyConfig.addPlugin(InputPathToUrlTransformPlugin);
-
 	eleventyConfig.addPlugin(feedPlugin, {
 		type: "atom", // or "rss", "json"
 		outputPath: "/feed/feed.xml",
@@ -83,12 +75,6 @@ export default async function (eleventyConfig) {
 
 	// Filters
 	eleventyConfig.addPlugin(pluginFilters);
-
-	eleventyConfig.addPlugin(IdAttributePlugin, {
-		// by default we use Eleventy’s built-in `slugify` filter:
-		// slugify: eleventyConfig.getFilter("slugify"),
-		// selector: "h1,h2,h3,h4,h5,h6", // default
-	});
 
 	eleventyConfig.addShortcode("currentBuildDate", () => {
 		return new Date().toISOString();
